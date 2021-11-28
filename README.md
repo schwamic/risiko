@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./docs/risk_logo.png" alt="risk logo" height="165">
+  <img src="./docs/risk_logo.png" alt="risk logo" height="165">
 </p>
 
 # RISK – Missions Management
