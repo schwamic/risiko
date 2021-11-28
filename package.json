@@ -1,0 +1,48 @@
+{
+  "name": "risiko",
+  "version": "1.0.0",
+  "description": "Risk Missions Management",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/**/*"
+  ],
+  "scripts": {
+    "heroku-postbuild": "yarn build:client",
+    "build:client": "yarn workspace @risk/client build",
+    "start:client": "yarn workspace @risk/client start",
+    "start:server:dev": "yarn workspace @risk/server start:dev",
+    "start:server": "yarn workspace @risk/server start"
+  },
+  "engines": {
+    "node": ">=16.13 <17"
+  },
+  "dependencies": {
+    "module-alias": "2.2.2"
+  },
+  "devDependencies": {
+    "standard": "16.0.4"
+  },
+  "_moduleAliases": {
+    "@root": "packages/server",
+    "@lib": "packages/server/lib",
+    "@loaders": "packages/server/loaders",
+    "@plugins": "packages/server/plugins",
+    "@routes": "packages/server/routes"
+  },
+  "standard": {
+    "validate": [
+      "javascript",
+      "json"
+    ],
+    "globals": [
+      "expect",
+      "describe",
+      "test",
+      "beforeAll",
+      "afterAll",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "risk-missions-management",
+  "repository": "https://github.com/schwamic/risiko",
+  "addons": [
+    "logentries",
+    "heroku-postgresql"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@risk/server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon --trace-warnings",
+    "test": "jest",
+    "lint:fix": "standard --fix"
+  },
+  "dependencies": {
+    "env-schema": "3.5.0",
+    "fastify": "3.24.0",
+    "fastify-autoload": "3.9.0",
+    "fastify-compress": "3.6.1",
+    "fastify-cors": "6.0.2",
+    "fastify-helmet": "5.3.2",
+    "fastify-postgres": "3.6.0",
+    "fastify-static": "4.5.0",
+    "fastify-swagger": "4.12.6",
+    "fastify-websocket": "4.0.0",
+    "jsonwebtoken": "8.5.1",
+    "lodash": "4.17.21",
+    "pg": "8.7.1",
+    "pino": "6.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.15"
+  },
+  "engines": {
+    "node": ">=16.13 <17"
+  }
+}
