@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles'
-import { grey } from '@mui/material/colors'
 
 /**
  * Material UI Theme settings
@@ -8,103 +7,60 @@ export const muiTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#02B7E5'
+      main: '#232229'
     },
     secondary: {
-      main: '#E30613'
+      main: '#FFFFFF'
     },
-    background: {
-      default: '#EDEDED'
-    },
-    error: {
-      main: '#E30613'
-    },
-    warning: {
-      main: '#FFC109'
-    },
-    info: {
-      main: '#02B7E5'
-    },
-    success: {
-      main: '#00A569'
+    red: {
+      100: '#D70C20',
+      200: '#960110'
     }
   },
   typography: {
-    htmlFontSize: 16,
-    fontSize: 14,
-    lineHeight: 1.75,
-    fontFamily: 'Muller, sans-serif',
+    fontFamily: 'Roboto, sans-serif',
     h1: {
-      fontSize: '1.5rem',
-      fontWeight: 700,
-      lineHeight: 1.334,
+      fontSize: '4rem',
+      fontWeight: 900,
+      lineHeight: 1.05,
       letterSpacing: '0em',
-      textTransform: 'uppercase',
       marginBottom: '0.875rem'
     },
     h2: {
-      fontSize: '1.125rem',
-      fontWeight: 700,
-      lineHeight: 1.6,
+      fontSize: '3rem',
+      fontWeight: 900,
+      lineHeight: 1.05,
       letterSpacing: '0em',
-      textTransform: 'uppercase',
       marginBottom: '0.875rem'
     },
     h3: {
-      fontSize: '0.875rem',
-      fontWeight: 700,
+      fontSize: '2.25rem',
+      fontWeight: 900,
+      lineHeight: 1.1,
       letterSpacing: '0em',
-      textTransform: 'uppercase',
       marginBottom: '0.875rem'
     },
-    button: {
-      fontSize: '0.875rem',
-      fontWeight: 700,
+    body1: {
+      fontSize: '2.25rem',
+      fontWeight: 900,
+      lineHeight: 1.1,
       letterSpacing: '0em',
-      textTransform: 'uppercase'
+      marginBottom: '0.875rem'
+    },
+    body2: {
+      fontSize: '1.5rem',
+      fontWeight: 900,
+      lineHeight: 1.2,
+      letterSpacing: '0em',
+      marginBottom: '0.875rem'
+    },
+    caption: {
+      fontSize: '0.75rem',
+      fontWeight: 900,
+      lineHeight: 1.4,
+      letterSpacing: '0em',
+      marginBottom: '0.875rem'
     }
   },
-  shape: {
-    borderRadius: 0
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        containedPrimary: {
-          color: '#FFFFFF'
-        }
-      }
-    },
-    MuiCardActions: {
-      styleOverrides: {
-        root: {
-          padding: '0 20px 20px '
-        }
-      }
-    },
-    MuiCardContent: {
-      styleOverrides: {
-        root: {
-          padding: '20px'
-        }
-      }
-    },
-    MuiDialogContentText: {
-      styleOverrides: {
-        root: {
-          color: grey[900]
-        }
-      }
-    },
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          fontSize: '1.125rem',
-          fontWeight: 700,
-          color: grey[900],
-          textTransform: 'uppercase'
-        }
-      }
-    }
-  }
+  components: {}
 })
