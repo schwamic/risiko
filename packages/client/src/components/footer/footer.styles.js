@@ -11,12 +11,9 @@ const linkContext = theme => ({
   marginRight: theme.spacing(2)
 })
 
-const routerLink = theme => {
-  console.log(theme)
-  return {
-    color: theme.palette.primary.main
-  }
-}
+const routerLink = theme => ({
+  color: theme.palette.primary.main
+})
 
 export const styles = {
   wrapper,

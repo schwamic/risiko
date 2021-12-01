@@ -14,7 +14,7 @@ const logo = theme => ({
 })
 
 const title = theme => ({
-  marginBottom: theme.spacing(5),
+  marginBottom: theme.spacing(6),
   maxWidth: theme.spacing(90),
   [`@media (min-width: ${theme.breakpoints.values.sm}px)`]: {
     marginLeft: theme.spacing(4)

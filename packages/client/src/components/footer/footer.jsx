@@ -18,7 +18,7 @@ function Footer (props) {
           color='primary'
           href={content.github.link}
           title={content.github.meta}
-          ariaLabel={content.github.meta}
+          aria-label={content.github.meta}
           target='_blank'
           rel='noopener noreferrer'
         >

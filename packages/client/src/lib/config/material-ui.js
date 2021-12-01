@@ -62,5 +62,42 @@ export const muiTheme = createTheme({
       marginBottom: '0.875rem'
     }
   },
-  components: {}
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxSizing: 'border-box',
+          fontWeight: 'bold',
+          borderRadius: 15,
+          padding: '8px 28px',
+          fontSize: '1rem'
+        },
+        contained: {
+          padding: '12px 24px'
+        },
+        outlined: {
+          border: '4px solid',
+          '&:hover': {
+            border: '4px solid',
+            backgroundColor: 'rgba(255, 255, 255, 0.15)'
+          }
+        }
+      }
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          paddingTop: 8,
+          color: '#FFFFFF',
+          '&::before': {
+            borderBottom: '5px solid #FFFFFF'
+          },
+          '&::after': {
+            borderBottom: '5px solid #FFFFFF'
+          }
+        }
+      }
+    }
+  }
 })

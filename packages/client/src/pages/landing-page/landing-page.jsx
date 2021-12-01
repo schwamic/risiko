@@ -2,6 +2,7 @@
 import { Typography, Grid } from '@mui/material'
 import RiskLogo from '../../lib/assets/risk_logo.png'
 import { Footer, Card, Page } from '../../components'
+import { CreateGameForm } from '../../containers/landing-page'
 import { content } from './landing-page.content'
 import { styles } from './landing-page.styles'
 
@@ -14,7 +15,9 @@ function LandingPage () {
         </Grid>
         <Grid item xs={12}>
           <Typography variant='h2' component='h1' css={styles.title}>{content.title} </Typography>
-          <Card css={{ margin: 30 }}>TODO</Card>
+          <Card>
+            <CreateGameForm />
+          </Card>
         </Grid>
         <Grid
           container
