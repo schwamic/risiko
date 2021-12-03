@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Typography, Stack } from '@mui/material'
+import { Typography, Link, Stack } from '@mui/material'
 import { Footer, Page } from '../../components'
 import { content } from './legal-notice-page.content'
 import { styles } from './legal-notice-page.styles'
@@ -41,6 +41,28 @@ function LegalNoticePage () {
             </Typography>
             <Typography color='secondary' variant='body2'>
               {content.legals[3].text}
+            </Typography>
+            {content.legals[3].externals.map((item, key) => (
+              <Typography key={`copyright-${key}`} color='secondary' variant='body2' component='div'>
+                - {item.text[0]}
+                <Link
+                  color='secondary'
+                  href={item.link}
+                  title={item.meta}
+                  aria-label={item.meta}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >{item.text[1]}
+                </Link>
+              </Typography>
+            ))}
+          </div>
+          <div>
+            <Typography color='secondary' variant='h3' component='h2'>
+              {content.legals[4].title}
+            </Typography>
+            <Typography color='secondary' variant='body2'>
+              {content.legals[4].text}
             </Typography>
           </div>
         </Stack>
