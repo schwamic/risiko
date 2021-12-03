@@ -1,5 +1,6 @@
 const title = {
   margin: 0,
+  paddingBottom: '4px',
   textDecoration: 'underline',
   textDecorationThickness: '5px',
   textUnderlineOffset: '0.5rem',

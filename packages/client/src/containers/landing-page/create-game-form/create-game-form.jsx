@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { Button, Grid, TextField } from '@mui/material'
+import { Button, Grid, Stack, TextField } from '@mui/material'
 import * as yup from 'yup'
 import { Formik, Field, Form } from 'formik'
 import { content } from './create-game-form.content'
+import { styles } from './create-game-form.styles'
 
 const validationSchema = yup.object().shape({
   user: yup.string().required(content.form.error.user[0]),
@@ -53,13 +54,11 @@ function CreateGameForm (props) {
               focused
             />
           </Grid>
-          <Grid container item spacing={4} xs={12} justifyContent='center' alignItems='center'>
-            <Grid item>
+          <Grid item xs={12} css={styles.buttons}>
+            <Stack spacing={4} direction={{ xs: 'column', sm: 'row' }}>
               <Button type='submit' variant='contained' color='secondary' disableElevation>{content.buttons.create}</Button>
-            </Grid>
-            <Grid item>
               <Button type='submit' variant='outlined' color='secondary' disableElevation>{content.buttons.join}</Button>
-            </Grid>
+            </Stack>
           </Grid>
         </Grid>
       </Form>

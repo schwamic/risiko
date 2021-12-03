@@ -1,2 +1,6 @@
 export { default as GameLink } from './game-link/game-link'
+export { default as NewGameView } from './new-game-view/new-game-view'
+export { default as PlayView } from './play-view/play-view'
 export { default as PlayersList } from './players-list/players-list'
+export { default as JoinForm } from './join-form/join.form'
+export { default as WaitView } from './wait-view/wait-view'

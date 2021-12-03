@@ -13,7 +13,12 @@ const avatar = theme => ({
   }
 })
 
+const gameLink = theme => ({
+  marginBottom: theme.spacing(0.75)
+})
+
 export const styles = {
   avatar,
-  button
+  button,
+  gameLink
 }

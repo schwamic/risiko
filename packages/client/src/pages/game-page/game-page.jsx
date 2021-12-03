@@ -1,11 +1,25 @@
 /** @jsxImportSource @emotion/react */
+import { useState, useEffect } from 'react'
 import { Grid, Typography, Button } from '@mui/material'
 import { Footer, Card, Page, Avatar } from '../../components'
-import { GameLink, PlayersList } from '../../containers/game-page'
+import { GameLink, PlayersList, JoinForm, PlayView, NewGameView, WaitView } from '../../containers/game-page'
 import { content } from './game-page.content'
 import { styles } from './game-page.styles'
 
+const states = {
+  join: 'join',
+  wait: 'wait',
+  play: 'play',
+  new: 'new'
+}
+
 function GamePage () {
+  const [state, setState] = useState(states.join)
+
+  useEffect(() => {
+    // set state
+  }, [state])
+
   const players = [
     {
       id: 'P5427',
@@ -37,7 +51,26 @@ function GamePage () {
     id: 'P1234',
     name: 'schwamic',
     state: 'online',
-    avatar: '2465429'
+    avatar: '2465429',
+    mission: 'My secret mission.'
+  }
+
+  const renderCard = () => {
+    return (
+      <>
+        {
+        state === states.join
+          ? <Card color='blue'><JoinForm /></Card>
+          : state === states.wait
+            ? <Card color='yellow'> <WaitView /> </Card>
+            : state === states.play
+              ? <Card color='green'> <PlayView user={user} /> </Card>
+              : state === states.new
+                ? <Card color='black'> <NewGameView /> </Card>
+                : null
+        }
+      </>
+    )
   }
 
   return (
@@ -45,26 +78,24 @@ function GamePage () {
       <Grid container spacing={10} justifyContent='center'>
         <Grid container item justifyContent='space-between' xs={12}>
           <Grid item xs={12} sm='auto'>
-            <GameLink game={game} />
+            <GameLink game={game} css={styles.gameLink} />
           </Grid>
-          <Grid item xs={12} sm='auto'>
-            <Avatar user={user} variant='responsive' css={styles.avatar} />
-          </Grid>
+          {state !== states.join && (
+            <Grid item xs={12} sm='auto'>
+              <Avatar user={user} variant='responsive' css={styles.avatar} />
+            </Grid>
+          )}
         </Grid>
-
-        {/* CARD */}
         <Grid container item spacing={5} xs={12}>
           <Grid item xs={12}>
-            <Card color='blue'>
-              <Typography color='secondary'>#join-game-form</Typography>
-            </Card>
+            {renderCard()}
           </Grid>
-          <Grid item xs={12}>
-            <Button css={styles.button} type='button' variant='contained' color='primary' disableElevation>{content.action}</Button>
-          </Grid>
+          {state !== states.join && (
+            <Grid item xs={12}>
+              <Button disabled={state === states.wait} css={styles.button} type='button' variant='contained' color='primary' disableElevation>{content.action}</Button>
+            </Grid>
+          )}
         </Grid>
-
-        {/* PLAYERS */}
         <Grid container item xs={12} spacing={2} justifyContent={{ xs: 'center', sm: 'start' }}>
           <Grid item>
             <Typography variant='h3'>Players</Typography>

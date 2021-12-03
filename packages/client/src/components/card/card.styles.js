@@ -50,11 +50,17 @@ const foregroundGreen = theme => ({
   backgroundImage: `linear-gradient(to top right, ${theme.palette.cyan[100]}, ${theme.palette.green[100]})`
 })
 
+const foregroundBlack = theme => ({
+  ...foreground(theme),
+  backgroundColor: theme.palette.primary.main
+})
+
 export const styles = {
   container,
   background,
   foregroundRed,
   foregroundBlue,
   foregroundYellow,
-  foregroundGreen
+  foregroundGreen,
+  foregroundBlack
 }
