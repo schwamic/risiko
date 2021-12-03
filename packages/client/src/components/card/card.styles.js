@@ -22,14 +22,39 @@ const background = theme => ({
 
 const foreground = theme => ({
   ...card(theme),
-  backgroundColor: 'red',
-  backgroundImage: `linear-gradient(to top right, ${theme.palette.red[200]}, ${theme.palette.red[100]})`,
   padding: theme.spacing(6.5),
   zIndex: 2
+})
+
+const foregroundRed = theme => ({
+  ...foreground(theme),
+  backgroundColor: theme.palette.red[100],
+  backgroundImage: `linear-gradient(to top right, ${theme.palette.red[200]}, ${theme.palette.red[100]})`
+})
+
+const foregroundBlue = theme => ({
+  ...foreground(theme),
+  backgroundColor: theme.palette.blue[100],
+  backgroundImage: `linear-gradient(to top right, ${theme.palette.purple[100]}, ${theme.palette.blue[100]})`
+})
+
+const foregroundYellow = theme => ({
+  ...foreground(theme),
+  backgroundColor: theme.palette.yellow[100],
+  backgroundImage: `linear-gradient(to top right, ${theme.palette.yellow[100]}, ${theme.palette.pink[100]})`
+})
+
+const foregroundGreen = theme => ({
+  ...foreground(theme),
+  backgroundColor: theme.palette.green[100],
+  backgroundImage: `linear-gradient(to top right, ${theme.palette.cyan[100]}, ${theme.palette.green[100]})`
 })
 
 export const styles = {
   container,
   background,
-  foreground
+  foregroundRed,
+  foregroundBlue,
+  foregroundYellow,
+  foregroundGreen
 }

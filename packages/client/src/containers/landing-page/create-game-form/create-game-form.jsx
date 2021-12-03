@@ -27,10 +27,11 @@ function CreateGameForm (props) {
       {...props}
     >
       <Form>
-        <Grid container spacing={4} justifyContent='center' alignItems='center'>
+        <Grid container spacing={5.5} justifyContent='center' alignItems='center'>
           <Grid item xs={12} sm={6} md={5}>
             <Field
               as={TextField}
+              inputProps={{ maxLength: 40 }}
               fullWidth
               name='game'
               label={content.form.input.game}
@@ -43,6 +44,7 @@ function CreateGameForm (props) {
           <Grid item xs={12} sm={6} md={5}>
             <Field
               as={TextField}
+              inputProps={{ maxLength: 8 }}
               fullWidth
               name='user'
               label={content.form.input.user}

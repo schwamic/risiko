@@ -32,7 +32,7 @@ function LandingPage () {
           {content.infos.map((item, index) => (
             <Grid item key={`info-${index}`} xs={12} sm={6}>
               <Typography variant='h3' component='h2'>{item.title}</Typography>
-              <Typography variant='body2'>{item.text}</Typography>
+              <Typography variant='body2' css={styles.info}>{item.text}</Typography>
             </Grid>
           ))}
         </Grid>

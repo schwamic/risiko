@@ -30,7 +30,7 @@ export const content = {
     },
     {
       title: 'Open Source',
-      text: 'This is a very small application based on NodeJS (Fastify, NextJS) and PostgreSQL. The app is hosted on Heroku (Frankfurt). The Code can be found on GitHub.'
+      text: 'This is a very small application based on ReactJS, FastifyJS and PostgreSQL. The app is hosted on Heroku (Europe). The code can be found on GitHub.'
     }
   ]
 }

@@ -12,13 +12,42 @@ export const muiTheme = createTheme({
     secondary: {
       main: '#FFFFFF'
     },
+    offline: {
+      main: '#777777'
+    },
+    online: {
+      main: '#016ACB'
+    },
     red: {
       100: '#D70C20',
       200: '#960110'
+    },
+    purple: {
+      100: '#A269FF'
+    },
+    blue: {
+      100: '#4DC9FF'
+    },
+    cyan: {
+      100: '#53D6FF'
+    },
+    green: {
+      100: '#B8F17F'
+    },
+    yellow: {
+      100: '#FFEE53'
+    },
+    pink: {
+      100: '#F17FC3'
     }
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
+    button: {
+      textTransform: 'none',
+      fontWeight: 'bold',
+      fontSize: '1.125rem'
+    },
     h1: {
       fontSize: '4rem',
       fontWeight: 900,
@@ -44,22 +73,25 @@ export const muiTheme = createTheme({
       fontSize: '2.25rem',
       fontWeight: 900,
       lineHeight: 1.1,
-      letterSpacing: '0em',
-      marginBottom: '0.875rem'
+      letterSpacing: '0em'
     },
     body2: {
       fontSize: '1.5rem',
       fontWeight: 900,
       lineHeight: 1.2,
-      letterSpacing: '0em',
-      marginBottom: '0.875rem'
+      letterSpacing: '0em'
+    },
+    body3: {
+      fontSize: '1rem',
+      fontWeight: 900,
+      lineHeight: 1.4,
+      letterSpacing: '0em'
     },
     caption: {
       fontSize: '0.75rem',
       fontWeight: 900,
       lineHeight: 1.4,
-      letterSpacing: '0em',
-      marginBottom: '0.875rem'
+      letterSpacing: '0em'
     }
   },
   components: {
@@ -67,13 +99,11 @@ export const muiTheme = createTheme({
       styleOverrides: {
         root: {
           boxSizing: 'border-box',
-          fontWeight: 'bold',
           borderRadius: 15,
-          padding: '8px 28px',
-          fontSize: '1rem'
+          padding: '6px 30px'
         },
         contained: {
-          padding: '12px 24px'
+          padding: '10px 26px'
         },
         outlined: {
           border: '4px solid',
@@ -87,14 +117,13 @@ export const muiTheme = createTheme({
     MuiInput: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
           paddingTop: 8,
           color: '#FFFFFF',
           '&::before': {
-            borderBottom: '5px solid #FFFFFF'
+            borderBottom: '4px solid #FFFFFF'
           },
           '&::after': {
-            borderBottom: '5px solid #FFFFFF'
+            borderBottom: '4px solid #FFFFFF'
           }
         }
       }

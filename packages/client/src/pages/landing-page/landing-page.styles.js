@@ -21,8 +21,13 @@ const title = theme => ({
   }
 })
 
+const info = theme => ({
+  marginBottom: theme.spacing(2)
+})
+
 export const styles = {
   logoWrapper,
   logo,
-  title
+  title,
+  info
 }
