@@ -1,7 +1,7 @@
 {
   "name": "risiko",
   "version": "1.0.0",
-  "description": "Risk Missions Management",
+  "description": "Risk Missions Dealer",
   "license": "MIT",
   "private": true,
   "workspaces": [

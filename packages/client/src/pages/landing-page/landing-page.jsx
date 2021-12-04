@@ -3,10 +3,13 @@ import { Typography, Grid } from '@mui/material'
 import RiskLogo from '../../lib/assets/risk_logo.png'
 import { Footer, Card, Page } from '../../components'
 import { CreateGameForm } from '../../containers/landing-page'
+import useScrollTop from '../../hooks/useScrollTop'
 import { content } from './landing-page.content'
 import { styles } from './landing-page.styles'
 
 function LandingPage () {
+  useScrollTop()
+
   return (
     <Page>
       <Grid container spacing={10} justifyContent='center'>

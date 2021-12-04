@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Grid, Typography, Button } from '@mui/material'
 import { Footer, Card, Page, Avatar } from '../../components'
 import { GameLink, PlayersList, JoinForm, PlayView, NewGameView, WaitView } from '../../containers/game-page'
+import useScrollTop from '../../hooks/useScrollTop'
 import { content } from './game-page.content'
 import { styles } from './game-page.styles'
 
@@ -14,6 +15,7 @@ const states = {
 }
 
 function GamePage () {
+  useScrollTop()
   const [state, setState] = useState(states.join)
 
   useEffect(() => {

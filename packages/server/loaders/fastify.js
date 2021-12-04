@@ -28,7 +28,7 @@ const bootstrap = async () => {
       'x-requested-with',
       'x-api-key'
     ],
-    origin: config.DISABLED_CORS ? '*' : [/risk-missions-management/],
+    origin: config.DISABLED_CORS ? '*' : [/risk-missions-dealer/],
     credentials: true
   })
 

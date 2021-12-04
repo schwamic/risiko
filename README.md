@@ -2,7 +2,7 @@
   <img src="./docs/risk_logo.png" alt="risk logo" height="165">
 </p>
 
-# RISK – Missions Management
+# Risk – Missions Dealer
 
 The aim of this small application is that you can distribute mission cards among all players over the web.
 

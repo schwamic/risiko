@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { Typography, Link, Stack } from '@mui/material'
 import { Footer, Page } from '../../components'
+import useScrollTop from '../../hooks/useScrollTop'
 import { content } from './legal-notice-page.content'
 import { styles } from './legal-notice-page.styles'
-
 function LegalNoticePage () {
+  useScrollTop()
+
   return (
     <div css={styles.background}>
       <Page>
