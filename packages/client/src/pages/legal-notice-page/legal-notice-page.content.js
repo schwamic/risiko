@@ -22,14 +22,19 @@ export const content = {
       text: 'In dieser Webanwendung wurden folgende kostenlos zur Verfügung gestellten Daten verwendet:',
       externals: [
         {
-          text: ['SVG Icons von: ', 'ICONIX (Noun Project)'],
+          text: ['Monster Icons von: ', 'ICONIX (Noun Project)'],
           link: 'https://thenounproject.com/iconix',
           meta: 'Zu ICONIX (Noun Project)'
         },
         {
-          text: ['Ghost SVG Icon von: ', 'Loka Mariella (Noun Project)'],
+          text: ['Ghost Icon von: ', 'Loka Mariella (Noun Project)'],
           link: 'https://thenounproject.com/icon/ghost-1079732/',
           meta: 'Zu Loka Mariella (Noun Project)'
+        },
+        {
+          text: ['Star Card Icon von: ', 'Airen99 (Noun Project)'],
+          link: 'https://thenounproject.com/icon/star-card-4222813/',
+          meta: 'Zu Airen99 (Noun Project)'
         },
         {
           text: ['Risiko Logo von: ', 'CleanPNG'],
