@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/risk_logo.png" alt="risk logo" height="165">
+  <img src="./docs/risk_missions_dealer_icon.png" alt="risk logo" height="110">
 </p>
 
 # Risk – Missions Dealer
