@@ -1,0 +1,18 @@
+version: "3.6"
+
+services:
+  postgres:
+    container_name: risk_postgres_container
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./lib/infrastructure/database/migrations/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./lib/infrastructure/database/migrations/prefill.sql:/docker-entrypoint-initdb.d/prefill.sql
+
+volumes:
+    postgres:

@@ -1,0 +1,54 @@
+INSERT INTO games (
+  name,
+  state
+)
+VALUES
+  (
+    'diyafulu',
+    'NEW_GAME'
+  ),
+  (
+    'ruwettiri',
+    'NEW_GAME'
+  ),
+  (
+    'moducoxo',
+    'NEW_GAME'
+  );
+
+INSERT INTO players (
+  "gameId",
+  name,
+  secret,
+  avatar,
+  state
+)
+VALUES
+  (
+    1,
+    'posip',
+    'aaaaaa',
+    '2465426',
+    'ONLINE'
+  ),
+  (
+    1,
+    'miwif',
+    'ssssss',
+    '2465428',
+    'OFFLINE'
+  ),
+  (
+    2,
+    'koxig',
+    'dddddd',
+    '2465432',
+    'ONLINE'
+  ),
+  (
+    3,
+    'quoceh',
+    'ffffff',
+    '2465436',
+    'ONLINE'
+  );
