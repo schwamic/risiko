@@ -22,9 +22,9 @@ export const content = {
       text: 'In dieser Webanwendung wurden folgende kostenlos zur Verfügung gestellten Daten verwendet:',
       externals: [
         {
-          text: ['Monster Icons von: ', 'ICONIX (Noun Project)'],
-          link: 'https://thenounproject.com/iconix',
-          meta: 'Zu ICONIX (Noun Project)'
+          text: ['Monster Icons von: ', 'iconix (Noun Project)'],
+          link: 'https://thenounproject.com/browse/collection-icon/monster-face-73465',
+          meta: 'Zu iconix (Noun Project)'
         },
         {
           text: ['Ghost Icon von: ', 'Loka Mariella (Noun Project)'],

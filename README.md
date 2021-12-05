@@ -9,7 +9,6 @@ The aim of this small application is that you can distribute mission cards among
 ## Requirements
 
 1. No mission card is distributed twice
-2. Mission cards are secret
-3. As long as a user is online no second login is possible
-4. Offline users will be deleted on action “New Game”
-5. If a game has started, new players get automatically a mission card
+2. Mission cards are secret (cookie restriction)
+3. Offline users will be deleted on action "New Game"
+4. If a game has started, new players get automatically a mission card
