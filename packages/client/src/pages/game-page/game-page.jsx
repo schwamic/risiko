@@ -100,7 +100,7 @@ function GamePage () {
         </Grid>
         <Grid container item xs={12} spacing={2} justifyContent={{ xs: 'center', sm: 'start' }}>
           <Grid item>
-            <Typography variant='h3'>Players</Typography>
+            <Typography variant='h3' component='h2'>Players</Typography>
           </Grid>
           <PlayersList players={players} css={styles.players} />
         </Grid>
