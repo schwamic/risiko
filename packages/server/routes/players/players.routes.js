@@ -3,10 +3,10 @@ const schemas = require('./players.schemas')
 const controller = require('./players.controller')
 
 module.exports = {
-  get: fastify => ({
+  getMany: fastify => ({
     method: enums.httpMethods.GET,
     path: '/',
-    schema: schemas.get,
-    handler: controller.get
+    schema: schemas.getMany,
+    handler: controller(fastify).getMany
   })
 }

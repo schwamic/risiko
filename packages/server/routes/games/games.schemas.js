@@ -1,58 +1,110 @@
 const { ErrorSchema } = require('@lib/common/errors')
 const enums = require('@lib/common/enums')
 
-const GameResponseSchema = {
+const GameSchema = {
   type: 'object',
   properties: {
-    id: { type: 'string', examples: ['id123456'], description: 'Identifier' },
-    name: { type: 'string', examples: ['My Game'], description: 'Name of the game' },
-    state: { type: 'string', examples: ['playing'], description: 'State of the game' },
-    created_at: { type: 'string', format: 'date-time', description: 'Game created' },
-    updated_at: { type: 'string', format: 'date-time', description: 'Last update' }
+    gameId: { type: 'number', examples: [42], description: 'Identifier' },
+    name: { type: 'string', examples: ['My foxadamu'], description: 'Name of the game' },
+    state: { type: 'string', examples: ['PLAYING'], description: 'State of the game' },
+    createdAt: { type: 'string', format: 'date-time', description: 'Game created' },
+    updatedAt: { type: 'string', format: 'date-time', description: 'Last update' }
   },
-  required: ['id', 'name', 'state', 'created_at', 'updated_at'],
+  required: ['gameId', 'name', 'state', 'createdAt', 'updatedAt'],
   additionalProperties: false
 }
 
-const paramsSchema = {
+const GamesSchema = {
+  type: 'array',
+  items: GameSchema
+}
+
+const UpdateGameSchema = {
   type: 'object',
   properties: {
-    gameId: { type: 'string', examples: ['id123456'] }
+    state: { type: 'string', examples: ['PLAYING'] }
+  },
+  required: ['state'],
+  additionalProperties: false
+}
+
+const GameNameSchema = {
+  type: 'object',
+  properties: {
+    name: { type: 'string', examples: ['foxadamu'] }
+  },
+  required: ['name'],
+  additionalProperties: false
+}
+
+const GameIdSchema = {
+  type: 'object',
+  properties: {
+    gameId: { type: 'number', examples: [42] }
   },
   required: ['gameId'],
   additionalProperties: false
 }
 
+const ErrorsSchema = {
+  [enums.httpCodes.BadRequest]: {
+    description: 'Bad Request',
+    ...ErrorSchema
+  },
+  [enums.httpCodes.Unauthorized]: {
+    description: 'Unauthorized',
+    ...ErrorSchema
+  },
+  [enums.httpCodes.NotFound]: {
+    description: 'Not Found',
+    ...ErrorSchema
+  },
+  [enums.httpCodes.ValidationError]: {
+    description: 'Invalid',
+    ...ErrorSchema
+  },
+  [enums.httpCodes.InternalServerError]: {
+    description: 'Error',
+    ...ErrorSchema
+  }
+}
+
 module.exports = {
-  get: {
+  getOne: {
     summary: 'Get a game',
     tags: ['Games'],
-    params: paramsSchema,
+    params: GameNameSchema,
     response: {
-      200: {
+      [enums.httpCodes.OK]: {
         description: 'OK',
-        ...GameResponseSchema
+        ...GameSchema
       },
-      [enums.httpCodes.BadRequest]: {
-        description: 'Bad Request',
-        ...ErrorSchema
+      ...ErrorsSchema
+    }
+  },
+  createOne: {
+    summary: 'Create a game',
+    tags: ['Games'],
+    body: GameNameSchema,
+    response: {
+      [enums.httpCodes.OK]: {
+        description: 'OK',
+        ...GamesSchema
       },
-      [enums.httpCodes.Unauthorized]: {
-        description: 'Unauthorized',
-        ...ErrorSchema
+      ...ErrorsSchema
+    }
+  },
+  updateOne: {
+    summary: 'Update a game',
+    tags: ['Games'],
+    params: GameIdSchema,
+    body: UpdateGameSchema,
+    response: {
+      [enums.httpCodes.OK]: {
+        description: 'OK',
+        ...GameSchema
       },
-      [enums.httpCodes.NotFound]: {
-        description: 'Not Found',
-        ...ErrorSchema
-      },
-      [enums.httpCodes.ValidationError]: {
-        description: 'Invalid',
-        ...ErrorSchema
-      },
-      [enums.httpCodes.InternalServerError]: {
-        description: 'Error',
-        ...ErrorSchema
-      }
+      ...ErrorsSchema
     }
   }
 }

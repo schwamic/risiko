@@ -1,3 +1,6 @@
+-- Enable for HEROKU DATACLIPS
+-- set transaction read write;
+
 --
 -- ENUMS
 CREATE TYPE game_state as ENUM ('PLAYING', 'NEW_GAME');

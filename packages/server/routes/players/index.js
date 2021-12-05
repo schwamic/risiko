@@ -8,7 +8,7 @@ module.exports = async function players (fastify) {
   // Every route inside this plugin is protected
   fastify.addHook('onRequest', fastify.authenticate)
 
-  fastify.route(playersRoutes.get(fastify))
+  fastify.route(playersRoutes.getMany(fastify))
 }
 
 module.exports.autoPrefix = '/api/games/:gameId/players'
