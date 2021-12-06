@@ -1,6 +1,3 @@
--- Enable for HEROKU DATACLIPS
--- set transaction read write;
-
 --
 -- EXTENSINS
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
