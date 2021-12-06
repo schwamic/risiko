@@ -35,11 +35,9 @@ const PlayerSchema = {
 const CreatePlayerSchema = {
   type: 'object',
   properties: {
-    name: { type: 'string', examples: ['hiwug'], description: 'Name of the player' },
-    avatar: { type: 'string', examples: ['2465426'], description: 'Avatar of the player' },
-    key: { type: 'string', examples: ['abcdef'], description: 'Public key' }
+    name: { type: 'string', examples: ['hiwug'] }
   },
-  required: ['name', 'avatar', 'key'],
+  required: ['name'],
   additionalProperties: false
 }
 

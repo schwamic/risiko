@@ -1,5 +1,7 @@
 const { QueryService } = require('@lib/infrastructure/database')
 const errors = require('@lib/common/errors')
+const enums = require('@lib/common/enums')
+const generateRandomNumber = require('@lib/utils/generate-random-number')
 
 module.exports = fastify => ({
   getOne: async (request, reply) => {
@@ -24,16 +26,16 @@ module.exports = fastify => ({
   },
   createOne: async (request, reply) => {
     const { gameId } = request.params
-    const newPlayer = request.body
+    let { name } = request.body
     const queryService = new QueryService()
     const client = await fastify.pg.connect()
     const { rows: players } = await client.query(queryService.players.getMany, [gameId])
-    const playersWithSameName = players.filter(player => player.name.includes(newPlayer.name))
+    const playersWithSameName = players.filter(player => player.name.includes(name))
     if (playersWithSameName.length > 0) {
-      newPlayer.name = `${newPlayer.name}${playersWithSameName.length + 1}`
+      name = `${name}${playersWithSameName.length + 1}`
     }
-    const { name, key, avatar } = newPlayer
-    const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, key, avatar])
+    const avatar = enums.avatars[generateRandomNumber(0, enums.avatars.length)]
+    const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar])
     client.release()
     reply.send(createdPlayers[0])
   },

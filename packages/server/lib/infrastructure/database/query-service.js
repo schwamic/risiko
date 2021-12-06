@@ -3,7 +3,7 @@ class QueryService {
     return {
       getOne: 'SELECT * FROM players WHERE "playerId" = $1 AND "gameId" = $2',
       getMany: 'SELECT * FROM players WHERE "gameId" = $1',
-      createOne: 'INSERT INTO players ("gameId", name, key, avatar, state) VALUES ($1, $2, $3, $4, \'ONLINE\') RETURNING *',
+      createOne: 'INSERT INTO players ("gameId", name, avatar, state) VALUES ($1, $2, $3, \'ONLINE\') RETURNING *',
       updateOne: 'UPDATE players SET state = $1, mission = $2 WHERE "playerId" = $3 AND "gameId" = $4 RETURNING *',
       deleteOne: 'DELETE FROM players WHERE "playerId" = $1 AND "gameId" = $2',
       deleteMany: 'DELETE FROM players WHERE "gameId" = $1 AND state = \'OFFLINE\''
