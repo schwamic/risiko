@@ -36,7 +36,9 @@ const bootstrap = async () => {
 
   fastify.register(FastifyPostgres, {
     connectionString: config.DATABASE_URL,
-    rejectUnauthorized: false
+    ssl: {
+      rejectUnauthorized: false
+    }
   })
 
   fastify.register(autoload, {
