@@ -35,7 +35,8 @@ const bootstrap = async () => {
   fastify.register(FastifyWebsocket)
 
   fastify.register(FastifyPostgres, {
-    connectionString: config.DATABASE_URL
+    connectionString: config.DATABASE_URL,
+    ssl: config.USE_SSL === 'true'
   })
 
   fastify.register(autoload, {

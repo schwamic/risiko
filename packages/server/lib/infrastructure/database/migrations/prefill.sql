@@ -9,7 +9,7 @@ VALUES
   ),
   (
     'ruwettiri',
-    'NEW_GAME'
+    'PLAYING'
   ),
   (
     'moducoxo',
@@ -19,7 +19,6 @@ VALUES
 INSERT INTO players (
   "gameId",
   name,
-  key,
   avatar,
   state
 )
@@ -27,28 +26,24 @@ VALUES
   (
     1,
     'posip',
-    'aaaaaa',
     '2465426',
     'ONLINE'
   ),
   (
     1,
     'miwif',
-    'ssssss',
     '2465428',
     'OFFLINE'
   ),
   (
     2,
     'koxig',
-    'dddddd',
     '2465432',
     'ONLINE'
   ),
   (
     3,
     'quoceh',
-    'ffffff',
     '2465436',
     'ONLINE'
   );
