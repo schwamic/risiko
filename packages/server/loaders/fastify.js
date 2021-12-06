@@ -34,12 +34,15 @@ const bootstrap = async () => {
 
   fastify.register(FastifyWebsocket)
 
-  fastify.register(FastifyPostgres, {
-    connectionString: config.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  })
+  fastify.register(FastifyPostgres, config.DATABASE_USE_SSL
+    ? {
+        connectionString: config.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
+      }
+    : {
+        connectionString: config.DATABASE_URL
+      }
+  )
 
   fastify.register(autoload, {
     dir: path.join(__dirname, '../plugins'),

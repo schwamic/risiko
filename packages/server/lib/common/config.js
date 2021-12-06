@@ -10,7 +10,8 @@ const schema = {
     LOG_LEVEL: { type: 'string', default: 'info' },
     DISABLED_CORS: { type: 'boolean', default: false },
     JWT_SIGNATURE: { type: 'string' },
-    DATABASE_URL: { type: 'string' }
+    DATABASE_URL: { type: 'string' },
+    DATABASE_USE_SSL: { type: 'boolean', default: true }
   },
   required: [
     'JWT_SIGNATURE',
