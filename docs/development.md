@@ -14,4 +14,4 @@ For everything to work, you should have installed the following:
 ## Heroku PostgreSQL
 
 - [SSL Config](https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-node-js)
-- Init database via `heroku-cli`, `psql` and sql-script
+- Init database via `heroku-cli`, `psql` and `packages/server/lib/infrastructure/database/migrations/create.sql`

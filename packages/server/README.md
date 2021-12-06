@@ -1,8 +1,10 @@
 # Server App
 
+This project was bootstrapped with [Fastify](https://www.fastify.io).
+
 ## Scripts
 
-In this project you can run:
+In the project directory, you can run:
 
 ### `docker-compose up`
 
