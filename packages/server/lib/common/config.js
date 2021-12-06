@@ -9,7 +9,6 @@ const schema = {
     VERSION: { type: 'string', default: pjson.version },
     LOG_LEVEL: { type: 'string', default: 'info' },
     DISABLED_CORS: { type: 'boolean', default: false },
-    USE_SSL: { type: 'boolean', default: false },
     JWT_SIGNATURE: { type: 'string' },
     DATABASE_URL: { type: 'string' }
   },
