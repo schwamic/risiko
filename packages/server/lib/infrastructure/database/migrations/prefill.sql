@@ -19,7 +19,7 @@ VALUES
 INSERT INTO players (
   "gameId",
   name,
-  secret,
+  key,
   avatar,
   state
 )

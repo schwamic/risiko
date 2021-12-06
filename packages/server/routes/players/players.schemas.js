@@ -8,7 +8,7 @@ const PublicPlayersSchema = {
     properties: {
       playerId: { type: 'number', examples: [42], description: 'Player identifier' },
       name: { type: 'string', examples: ['hiwug'], description: 'Name of the player' },
-      avatar: { type: 'string', examples: ['123456'], description: 'Avatar of the player' },
+      avatar: { type: 'string', examples: ['2465426'], description: 'Avatar of the player' },
       state: { type: 'string', examples: ['ONLINE'], description: 'State of the player' }
     },
     required: ['playerId', 'name', 'avatar', 'state'],
@@ -22,7 +22,7 @@ const PlayerSchema = {
     playerId: { type: 'number', examples: [42], description: 'Player identifier' },
     gameId: { type: 'number', examples: [42], description: 'Game identifier' },
     name: { type: 'string', examples: ['hiwug'], description: 'Name of the player' },
-    avatar: { type: 'string', examples: ['123456'], description: 'Avatar of the player' },
+    avatar: { type: 'string', examples: ['2465426'], description: 'Avatar of the player' },
     state: { type: 'string', examples: ['ONLINE'], description: 'State of the player' },
     mission: { type: 'string', examples: ['secret mission.'], description: 'Secret mission' },
     createdAt: { type: 'string', format: 'date-time', description: 'Player created' },
@@ -32,12 +32,42 @@ const PlayerSchema = {
   additionalProperties: false
 }
 
+const CreatePlayerSchema = {
+  type: 'object',
+  properties: {
+    name: { type: 'string', examples: ['hiwug'], description: 'Name of the player' },
+    avatar: { type: 'string', examples: ['2465426'], description: 'Avatar of the player' },
+    key: { type: 'string', examples: ['abcdef'], description: 'Public key' }
+  },
+  required: ['name', 'avatar', 'key'],
+  additionalProperties: false
+}
+
+const UpdatePlayerSchema = {
+  type: 'object',
+  properties: {
+    state: { type: 'string', examples: ['ONLINE'] }
+  },
+  required: ['state'],
+  additionalProperties: false
+}
+
 const GameIdSchema = {
   type: 'object',
   properties: {
     gameId: { type: 'number', examples: [42] }
   },
   required: ['gameId'],
+  additionalProperties: false
+}
+
+const GameAndPlayerIdSchema = {
+  type: 'object',
+  properties: {
+    gameId: { type: 'number', examples: [42] },
+    playerId: { type: 'number', examples: [42] }
+  },
+  required: ['gameId', 'playerId'],
   additionalProperties: false
 }
 
@@ -65,6 +95,18 @@ const ErrorsSchema = {
 }
 
 module.exports = {
+  getOne: {
+    summary: 'Get a player',
+    tags: ['Players'],
+    params: GameAndPlayerIdSchema,
+    response: {
+      [enums.httpCodes.OK]: {
+        description: 'OK',
+        ...PlayerSchema
+      },
+      ...ErrorsSchema
+    }
+  },
   getMany: {
     summary: 'Get a list of players',
     tags: ['Players'],
@@ -73,6 +115,32 @@ module.exports = {
       [enums.httpCodes.OK]: {
         description: 'OK',
         ...PublicPlayersSchema
+      },
+      ...ErrorsSchema
+    }
+  },
+  createOne: {
+    summary: 'Create a player',
+    tags: ['Players'],
+    params: GameIdSchema,
+    body: CreatePlayerSchema,
+    response: {
+      [enums.httpCodes.OK]: {
+        description: 'OK',
+        ...PlayerSchema
+      },
+      ...ErrorsSchema
+    }
+  },
+  updateOne: {
+    summary: 'Update a player',
+    tags: ['Players'],
+    params: GameAndPlayerIdSchema,
+    body: UpdatePlayerSchema,
+    response: {
+      [enums.httpCodes.OK]: {
+        description: 'OK',
+        ...PlayerSchema
       },
       ...ErrorsSchema
     }

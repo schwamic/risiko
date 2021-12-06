@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS players (
   "gameId" INT NOT NULL,
   "name" TEXT NOT NULL,
   "mission" TEXT,
-  "secret" TEXT NOT NULL,
+  "key" TEXT NOT NULL,
   "avatar" TEXT NOT NULL,
 	"state" player_state NOT NULL,
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),

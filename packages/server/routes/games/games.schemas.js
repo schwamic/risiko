@@ -14,11 +14,6 @@ const GameSchema = {
   additionalProperties: false
 }
 
-const GamesSchema = {
-  type: 'array',
-  items: GameSchema
-}
-
 const UpdateGameSchema = {
   type: 'object',
   properties: {
@@ -89,7 +84,7 @@ module.exports = {
     response: {
       [enums.httpCodes.OK]: {
         description: 'OK',
-        ...GamesSchema
+        ...GameSchema
       },
       ...ErrorsSchema
     }
