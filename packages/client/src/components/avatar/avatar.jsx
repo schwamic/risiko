@@ -16,7 +16,7 @@ function Avatar ({ user, variant = 'fixed', fontVariant = 'body2', ...props }) {
 
   return (
     <div css={styles[variant]} {...props}>
-      <Badge overlap='circular' badgeContent=' ' css={styles[user.state]} {...props}>
+      <Badge overlap='circular' badgeContent=' ' css={styles[user.state.toLowerCase()]} {...props}>
         <MuiAvatar alt={user.name} sx={{ width: 60, height: 60, bgcolor: grey[200] }}>
           {renderMonster()}
         </MuiAvatar>

@@ -11,13 +11,13 @@ function PlayersList ({ players, ...props }) {
       {players?.length > 0
         ? (
           <>
-            {players.length > 0 && players.filter(player => player.state === 'offline').map((player) => (
-              <Grid item key={player.id}>
+            {players.length > 0 && players.filter(player => player.state === 'OFFLINE').map((player) => (
+              <Grid item key={player.playerId}>
                 <Avatar user={player} fontVariant='body3' />
               </Grid>
             ))}
-            {players.length > 0 && players.filter(player => player.state === 'online').map((player) => (
-              <Grid item key={player.id}>
+            {players.length > 0 && players.filter(player => player.state === 'ONLINE').map((player) => (
+              <Grid item key={player.playerId}>
                 <Avatar user={player} fontVariant='body3' />
               </Grid>
             ))}

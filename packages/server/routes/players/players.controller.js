@@ -26,7 +26,7 @@ module.exports = fastify => ({
   },
   createOne: async (request, reply) => {
     const { gameId } = request.params
-    let { name } = request.body
+    let { name, key } = request.body
     const queryService = new QueryService()
     const client = await fastify.pg.connect()
     const { rows: players } = await client.query(queryService.players.getMany, [gameId])
@@ -35,7 +35,7 @@ module.exports = fastify => ({
       name = `${name}${playersWithSameName.length + 1}`
     }
     const avatar = enums.avatars[generateRandomNumber(0, enums.avatars.length)]
-    const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar])
+    const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar, key])
     client.release()
     reply.send(createdPlayers[0])
   },

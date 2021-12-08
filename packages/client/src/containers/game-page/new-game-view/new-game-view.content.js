@@ -1,7 +1,6 @@
 export const content = {
-  info: 'Please confirm that you would like to start a new round.',
+  info: 'When everyone is ready, one person can deal the cards.',
   buttons: {
-    confirm: "Let's go",
-    cancel: 'Cancel'
+    start: 'Deal Cards'
   }
 }

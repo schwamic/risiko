@@ -1,74 +1,38 @@
 /** @jsxImportSource @emotion/react */
-import { useState, useEffect } from 'react'
 import { Grid, Typography, Button } from '@mui/material'
+import { isNil } from 'lodash'
 import { Footer, Card, Page, Avatar } from '../../components'
-import { GameLink, PlayersList, JoinForm, PlayView, NewGameView, WaitView } from '../../containers/game-page'
+import { GameLink, PlayersList, JoinForm, PlayingView, NewGameView, ConfirmView } from '../../containers/game-page'
+import enums from '../../lib/common/enums'
 import useScrollTop from '../../hooks/useScrollTop'
+import useGame from '../../hooks/useGame'
 import { content } from './game-page.content'
 import { styles } from './game-page.styles'
 
-const states = {
-  join: 'join',
-  wait: 'wait',
-  play: 'play',
-  new: 'new'
-}
-
 function GamePage () {
   useScrollTop()
-  const [state, setState] = useState(states.join)
+  const { game, player, players, state, setState, actions } = useGame()
 
-  useEffect(() => {
-    // set state
-  }, [state])
-
-  const players = [
-    {
-      id: 'P5427',
-      name: 'player1',
-      state: 'online',
-      avatar: '2465427'
-    },
-    {
-      id: 'P5431',
-      name: 'player2',
-      state: 'online',
-      avatar: '2465431'
-    },
-    {
-      id: 'P5434',
-      name: 'player3',
-      state: 'offline',
-      avatar: '2465434'
-    }
-  ]
-
-  const game = {
-    id: 'G9876',
-    name: 'Eins Zwo Risiko veeeeeeerrrryyyyyy llllooooooooooooong!!!!!',
-    state: 'new game'
+  const handleCancel = () => {
+    setState(enums.gameStates.play)
   }
 
-  const user = {
-    id: 'P1234',
-    name: 'schwamic',
-    state: 'online',
-    avatar: '2465429',
-    mission: 'My secret mission.'
+  const handleNewGame = () => {
+    setState(enums.gameStates.confirm)
   }
 
   const renderCard = () => {
     return (
       <>
         {
-        state === states.join
-          ? <Card color='blue'><JoinForm /></Card>
-          : state === states.wait
-            ? <Card color='yellow'> <WaitView /> </Card>
-            : state === states.play
-              ? <Card color='green'> <PlayView user={user} /> </Card>
-              : state === states.new
-                ? <Card color='black'> <NewGameView /> </Card>
+        state === enums.gameStates.join
+          ? <Card color='blue'><JoinForm onJoin={({ user }) => actions.joinPlayer(user)} /></Card>
+          : state === enums.gameStates.new
+            ? <Card color='yellow'> <NewGameView onDealCards={() => actions.dealCards()} /> </Card>
+            : state === enums.gameStates.play
+              ? <Card color='green'> <PlayingView player={player} /> </Card>
+              : state === enums.gameStates.confirm
+                ? <Card color='black'> <ConfirmView onConfirm={() => actions.startNewGame()} onCancel={handleCancel} /> </Card>
                 : null
         }
       </>
@@ -77,35 +41,43 @@ function GamePage () {
 
   return (
     <Page>
-      <Grid container spacing={10} justifyContent='center'>
-        <Grid container item justifyContent='space-between' xs={12}>
-          <Grid item xs={12} sm='auto'>
-            <GameLink game={game} css={styles.gameLink} />
-          </Grid>
-          {state !== states.join && (
-            <Grid item xs={12} sm='auto'>
-              <Avatar user={user} variant='responsive' css={styles.avatar} />
+      <>
+        {!isNil(game) && state !== enums.gameStates.loading
+          ? (
+            <Grid container spacing={10} justifyContent='center'>
+              <Grid container item justifyContent='space-between' xs={12}>
+                <Grid item xs={12} sm='auto'>
+                  <GameLink game={game} css={styles.gameLink} />
+                </Grid>
+                {state !== enums.gameStates.join && (
+                  <Grid item xs={12} sm='auto'>
+                    {!isNil(player) && <Avatar user={player} variant='responsive' css={styles.avatar} />}
+                  </Grid>
+                )}
+              </Grid>
+              <Grid container item spacing={5} xs={12}>
+                <Grid item xs={12}>
+                  {renderCard()}
+                </Grid>
+                {state !== enums.gameStates.join && (
+                  <Grid item xs={12}>
+                    <Button onClick={handleNewGame} disabled={state === enums.gameStates.new} css={styles.button} type='button' variant='contained' color='primary' disableElevation>{content.action}</Button>
+                  </Grid>
+                )}
+              </Grid>
+              <Grid container item xs={12} spacing={2} justifyContent={{ xs: 'center', sm: 'start' }}>
+                <Grid item>
+                  <Typography variant='h3' component='h2'>Players</Typography>
+                </Grid>
+                {!isNil(players) && (
+                  <PlayersList players={players} css={styles.players} />
+                )}
+              </Grid>
             </Grid>
-          )}
-        </Grid>
-        <Grid container item spacing={5} xs={12}>
-          <Grid item xs={12}>
-            {renderCard()}
-          </Grid>
-          {state !== states.join && (
-            <Grid item xs={12}>
-              <Button disabled={state === states.wait} css={styles.button} type='button' variant='contained' color='primary' disableElevation>{content.action}</Button>
-            </Grid>
-          )}
-        </Grid>
-        <Grid container item xs={12} spacing={2} justifyContent={{ xs: 'center', sm: 'start' }}>
-          <Grid item>
-            <Typography variant='h3' component='h2'>Players</Typography>
-          </Grid>
-          <PlayersList players={players} css={styles.players} />
-        </Grid>
-      </Grid>
-      <Footer />
+            )
+          : <> ...loading </>}
+        <Footer />
+      </>
     </Page>
   )
 }

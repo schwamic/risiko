@@ -1,8 +1,4 @@
 --
--- EXTENSINS
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
---
 -- ENUMS
 CREATE TYPE game_state as ENUM ('PLAYING', 'NEW_GAME');
 CREATE TYPE player_state as ENUM ('ONLINE', 'OFFLINE');
@@ -23,7 +19,7 @@ CREATE TABLE IF NOT EXISTS players (
   "gameId" INT NOT NULL,
   "name" TEXT NOT NULL,
   "mission" TEXT,
-  "key" uuid DEFAULT uuid_generate_v4 (),
+  "key" TEXT NOT NULL,
   "avatar" TEXT NOT NULL,
 	"state" player_state NOT NULL,
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),

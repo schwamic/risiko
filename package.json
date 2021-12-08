@@ -11,6 +11,7 @@
     "heroku-postbuild": "yarn build:client",
     "start:server": "yarn workspace @risk/server start",
     "start:server:dev": "yarn workspace @risk/server start:dev",
+    "start:server:pg": "yarn workspace @risk/server start:pg",
     "start:client:dev": "yarn workspace @risk/client start",
     "build:client": "yarn workspace @risk/client build",
     "lint:fix": "standard --fix"
@@ -44,7 +45,8 @@
       "beforeAll",
       "afterAll",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "fetch"
     ]
   }
 }

@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react'
 import { Button, Grid, TextField } from '@mui/material'
 import * as yup from 'yup'
 import { Formik, Field, Form } from 'formik'
@@ -10,22 +9,14 @@ const validationSchema = yup.object().shape({
   user: yup.string().required(content.form.error.user[0])
 })
 
-const initialValues = {
-  user: ''
-}
-
-function JoinFrom (props) {
-  const [randomUser] = useState(generateRandomWord(5, 8))
-
-  const handleSubmit = values => {
-    console.log('values', values)
-  }
-
+function JoinFrom ({ onJoin, ...props }) {
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{
+        user: generateRandomWord(5, 8)
+      }}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      onSubmit={onJoin}
       {...props}
     >
       <Form>
@@ -39,7 +30,6 @@ function JoinFrom (props) {
               label={content.form.input.user}
               variant='standard'
               color='secondary'
-              placeholder={randomUser}
               focused
             />
           </Grid>

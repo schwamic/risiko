@@ -20,30 +20,35 @@ INSERT INTO players (
   "gameId",
   name,
   avatar,
-  state
+  state,
+  key
 )
 VALUES
   (
     1,
     'posip',
     '2465426',
-    'ONLINE'
+    'ONLINE',
+    'a12345'
   ),
   (
     1,
     'miwif',
     '2465428',
-    'OFFLINE'
+    'OFFLINE',
+    'b45678'
   ),
   (
     2,
     'koxig',
     '2465432',
-    'ONLINE'
+    'ONLINE',
+    'c23456'
   ),
   (
     3,
     'quoceh',
     '2465436',
-    'ONLINE'
+    'ONLINE',
+    'd34567'
   );

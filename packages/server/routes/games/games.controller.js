@@ -1,5 +1,7 @@
 const { QueryService } = require('@lib/infrastructure/database')
 const errors = require('@lib/common/errors')
+const enums = require('@lib/common/enums')
+const generateRandomNumber = require('@lib/utils/generate-random-number')
 
 module.exports = fastify => ({
   getOne: async (request, reply) => {
@@ -34,7 +36,16 @@ module.exports = fastify => ({
     const { rows: updatedGames } = await client.query(queryService.games.updateOne, [state, gameId])
     if (updatedGames.length > 0) {
       if (updatedGames[0].state === 'NEW_GAME') {
-        await client.query(queryService.players.deleteMany, [gameId])
+        await client.query(queryService.players.deleteManyOffline, [gameId])
+      } else if (updatedGames[0].state === 'PLAYING') {
+        const { rows: players } = await client.query(queryService.players.getMany, [gameId])
+        let missions = enums.missions
+        for (const player of players) {
+          const key = generateRandomNumber(0, missions.length)
+          const mission = missions[key]
+          missions = missions.filter((mission, index) => key !== index)
+          await client.query(queryService.players.updateOne, [player.state, mission, player.playerId, gameId])
+        }
       }
       client.release()
       reply.send(updatedGames[0])

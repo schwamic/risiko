@@ -6,12 +6,12 @@ const wrapper = theme => ({
   alignItems: 'center'
 })
 
-const info = theme => ({
+const text = theme => ({
   maxWidth: theme.spacing(80),
   marginBottom: theme.spacing(4)
 })
 
 export const styles = {
-  info,
+  text,
   wrapper
 }
