@@ -15,6 +15,7 @@ function PlayingView ({ player, ...props }) {
       // TODO: decrypt mission
       // const data = JSON.parse(session)
       // const key = data.player.key
+      //
     }
   }, [player])
 
