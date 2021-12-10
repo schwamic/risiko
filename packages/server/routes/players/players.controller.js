@@ -48,5 +48,17 @@ module.exports = fastify => ({
     } else {
       throw new errors.NotFoundError(`No Game with gameId ${gameId} found!`)
     }
+  },
+  updateOne: async (request, reply) => {
+    const { gameId, playerId } = request.params
+    const { state } = request.body
+    const queryService = new QueryService()
+    const client = await fastify.pg.connect()
+    const { rows: updatedPlayers } = await client.query(queryService.players.updateState, [state, playerId, gameId])
+    if (updatedPlayers.length > 0) {
+      reply.send(updatedPlayers[0])
+    } else {
+      throw new errors.NotFoundError(`No player with playerId ${playerId} found!`)
+    }
   }
 })

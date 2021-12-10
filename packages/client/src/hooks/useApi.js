@@ -27,6 +27,10 @@ export const useCreatePlayerApi = (options) => {
   return useMutation(API.createPlayer, options)
 }
 
+export const useUpdatePlayerApi = (options) => {
+  return useMutation(API.updatePlayer, options)
+}
+
 export const useGetGameApi = ({ params }) => {
   return useQuery(['game', params], API.getGame, {
     enabled: _isEnabled(params)
@@ -47,6 +51,7 @@ export const useUpdateGameApi = (options) => {
 export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
   const [websocket, setWebsocket] = useState()
   const [isOpen, setOpen] = useState(false)
+  const updatePlayer = useUpdatePlayerApi()
 
   useEffect(() => {
     let websocket
@@ -55,7 +60,7 @@ export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
 
       // First Connect
       websocket.onopen = () => {
-        websocket.send('login')
+        setPlayerOnline(gameId, playerId, websocket)
         setWebsocket(websocket)
         setOpen(true)
       }
@@ -63,14 +68,26 @@ export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
       // Get Updates
       websocket.onmessage = (event) => {
         const data = JSON.parse(event.data)
+        console.log(data)
         if (parseInt(data.gameId) === gameId) {
-          print('[Triggered Refetch]', data)
-          callbacks?.refetchGame()
-          callbacks?.refetchPlayers()
-          callbacks?.refetchPlayer()
+          if (parseInt(data.playerId) === playerId && data.type === 'close') {
+            setPlayerOnline(gameId, playerId, websocket)
+          } else {
+            print('[Triggered Refetch]', data)
+            callbacks?.refetchGame()
+            callbacks?.refetchPlayers()
+            callbacks?.refetchPlayer()
+          }
         } else {
           print('[Ignore Message]', data)
         }
+      }
+
+      // Connection lost or closed
+      websocket.onclose = () => {
+        setTimeout(function () {
+          setWebsocket(null)
+        }, 1000)
       }
     }
 
@@ -79,6 +96,15 @@ export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
       setOpen(false)
     }
   }, [gameId, playerId])
+
+  const setPlayerOnline = async (gameId, playerId, websocket) => {
+    await updatePlayer.mutateAsync({
+      gameId,
+      playerId,
+      state: 'ONLINE'
+    })
+    websocket?.send('update')
+  }
 
   const informAll = () => {
     if (isOpen) {

@@ -11,14 +11,11 @@ module.exports = function (fastify) {
       /**
        * Case: ONLINE
        */
-      connection.socket.on('message', async (_message) => {
-        const message = Buffer.from(_message).toString()
-        if (message === 'login') {
-          await client.query(queryService.players.updateState, [enums.playerStates.online, data.playerId, data.gameId])
-          console.log('LOGIN', data)
-        }
+      connection.socket.on('message', (_message) => {
         fastify.websocketServer.clients.forEach(client => {
-          client.send(JSON.stringify(data))
+          if (client.readyState === 1) {
+            client.send(JSON.stringify({ ...data, type: 'message' }))
+          }
         })
       })
 
@@ -27,9 +24,10 @@ module.exports = function (fastify) {
        */
       connection.socket.on('close', async (message) => {
         await client.query(queryService.players.updateState, [enums.playerStates.offline, data.playerId, data.gameId])
-        console.log('CLOSE', data)
         fastify.websocketServer.clients.forEach(client => {
-          client.send(JSON.stringify(data))
+          if (client.readyState === 1) {
+            client.send(JSON.stringify({ ...data, type: 'close' }))
+          }
         })
       })
     }

@@ -42,6 +42,15 @@ const CreatePlayerSchema = {
   additionalProperties: false
 }
 
+const UpdatePlayerSchema = {
+  type: 'object',
+  properties: {
+    state: { type: 'string', examples: ['ONLINE'] }
+  },
+  required: ['state'],
+  additionalProperties: false
+}
+
 const GameIdSchema = {
   type: 'object',
   properties: {
@@ -114,6 +123,19 @@ module.exports = {
     tags: ['Players'],
     params: GameIdSchema,
     body: CreatePlayerSchema,
+    response: {
+      [enums.httpCodes.OK]: {
+        description: 'OK',
+        ...PlayerSchema
+      },
+      ...ErrorsSchema
+    }
+  },
+  updateOne: {
+    summary: 'Update a player',
+    tags: ['Players'],
+    params: GameAndPlayerIdSchema,
+    body: UpdatePlayerSchema,
     response: {
       [enums.httpCodes.OK]: {
         description: 'OK',

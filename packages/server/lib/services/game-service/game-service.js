@@ -8,6 +8,13 @@ class GameService {
     this.queryService = queryService
   }
 
+  async removeCards (gameId) {
+    const { rows: players } = await this.client.query(this.queryService.players.getMany, [gameId])
+    for (const player of players) {
+      await this.client.query(this.queryService.players.updateMission, ['', player.playerId, gameId])
+    }
+  }
+
   async dealCards (gameId) {
     let missions = enums.missions
     const { rows: players } = await this.client.query(this.queryService.players.getMany, [gameId])

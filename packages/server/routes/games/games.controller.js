@@ -36,10 +36,11 @@ module.exports = fastify => ({
     const { rows: currentGames } = await client.query(queryService.games.getOneById, [gameId])
     if (currentGames.length > 0) {
       const { rows: updatedGames } = await client.query(queryService.games.updateOne, [state, gameId])
+      const gameService = new GameService(client, queryService)
       if (updatedGames[0]?.state === enums.gameStates.new && currentGames[0]?.state !== enums.gameStates.new) {
         await client.query(queryService.players.deleteManyOffline, [gameId])
+        await gameService.removeCards(gameId)
       } else if (updatedGames[0].state === enums.gameStates.play && currentGames[0].state !== enums.gameStates.play) {
-        const gameService = new GameService(client, queryService)
         await gameService.dealCards(gameId)
       }
       client.release()

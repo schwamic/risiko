@@ -12,7 +12,11 @@ import { styles } from './game-page.styles'
 
 function GamePage () {
   useScrollTop()
-  useBeforeunload((event) => { if (!isNil(game)) event.preventDefault() })
+  useBeforeunload((event) => {
+    if (!isNil(game) && !isNil(player) && player.state === 'ONLINE') {
+      event.preventDefault()
+    }
+  })
   const { game, player, players, state, setState, actions } = useGame()
 
   const handleCancel = () => {

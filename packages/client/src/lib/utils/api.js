@@ -18,6 +18,10 @@ export const createPlayer = async ({ gameId, ...values }) => {
   return await mutation(`/games/${gameId}/players`, values)
 }
 
+export const updatePlayer = async ({ gameId, ...values }) => {
+  return await mutation(`/games/${gameId}/players/${values.playerId}`, values, 'PATCH')
+}
+
 export const getGame = async ({ queryKey }) => {
   const [, { name }] = queryKey
   return await query(`/games/${name}`)
