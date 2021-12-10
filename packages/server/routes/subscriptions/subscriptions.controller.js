@@ -11,8 +11,8 @@ module.exports = function (fastify) {
       /**
        * Case: ONLINE
        */
-      connection.socket.on('message', (_message) => {
-        fastify.websocketServer.clients.forEach(client => {
+      connection.socket.on('message', function (_message) {
+        fastify.websocketServer.clients.forEach(function (client) {
           if (client.readyState === 1) {
             client.send(JSON.stringify({ ...data, type: 'message' }))
           }
@@ -22,9 +22,9 @@ module.exports = function (fastify) {
       /**
        * Case: OFFLINE
        */
-      connection.socket.on('close', async (message) => {
+      connection.socket.on('close', async function (message) {
         await client.query(queryService.players.updateState, [enums.playerStates.offline, data.playerId, data.gameId])
-        fastify.websocketServer.clients.forEach(client => {
+        fastify.websocketServer.clients.forEach(function (client) {
           if (client.readyState === 1) {
             client.send(JSON.stringify({ ...data, type: 'close' }))
           }

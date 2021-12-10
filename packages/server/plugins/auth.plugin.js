@@ -7,7 +7,7 @@ const { AuthService } = require('@lib/services/auth-service')
  */
 async function authenticationPlugin (fastify, _opts, done) {
   const authService = new AuthService()
-  fastify.decorate('authenticate', async req => authService.validateApiKey(req))
+  fastify.decorate('authenticate', async function (req) { return authService.validateApiKey(req) })
   done()
 }
 

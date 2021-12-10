@@ -9,7 +9,7 @@ const FastifyWebsocket = require('fastify-websocket')
 const config = require('@lib/common/config')
 const logger = require('@lib/utils/logger')
 
-const bootstrap = async () => {
+const bootstrap = async function () {
   logger.info('Setup server configuration.')
   const options = { ...config, logger }
   const fastify = Fastify(options)
