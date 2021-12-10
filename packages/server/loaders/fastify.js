@@ -32,7 +32,9 @@ const bootstrap = async () => {
     credentials: true
   })
 
-  fastify.register(FastifyWebsocket)
+  fastify.register(FastifyWebsocket, {
+    clientTracking: true
+  })
 
   fastify.register(FastifyPostgres, config.DATABASE_USE_SSL
     ? {

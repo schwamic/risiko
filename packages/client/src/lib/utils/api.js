@@ -1,6 +1,6 @@
 /**
  * This file contains API-related functions.
- * Each of these functions calls an endpoint of the "cretls-backend" API.
+ * Each of these functions calls an endpoint of the "risk-missions-dealer" API.
  */
 import { query, mutation } from './requests'
 
@@ -16,10 +16,6 @@ export const getPlayers = async ({ queryKey }) => {
 
 export const createPlayer = async ({ gameId, ...values }) => {
   return await mutation(`/games/${gameId}/players`, values)
-}
-
-export const updatePlayer = async ({ gameId, ...values }) => {
-  return await mutation(`/games/${gameId}/players/${values.playerId}`, values, 'PATCH')
 }
 
 export const getGame = async ({ queryKey }) => {

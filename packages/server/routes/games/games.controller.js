@@ -1,14 +1,14 @@
 const { QueryService } = require('@lib/infrastructure/database')
 const errors = require('@lib/common/errors')
 const enums = require('@lib/common/enums')
-const generateRandomNumber = require('@lib/utils/generate-random-number')
+const { GameService } = require('@lib/services/game-service')
 
 module.exports = fastify => ({
   getOne: async (request, reply) => {
     const { name } = request.params
     const queryService = new QueryService()
     const client = await fastify.pg.connect()
-    const { rows: games } = await client.query(queryService.games.getOne, [name])
+    const { rows: games } = await client.query(queryService.games.getOneByName, [name])
     client.release()
     if (games.length > 0) {
       reply.send(games[0])
@@ -33,19 +33,14 @@ module.exports = fastify => ({
     const { state } = request.body
     const queryService = new QueryService()
     const client = await fastify.pg.connect()
-    const { rows: updatedGames } = await client.query(queryService.games.updateOne, [state, gameId])
-    if (updatedGames.length > 0) {
-      if (updatedGames[0].state === 'NEW_GAME') {
+    const { rows: currentGames } = await client.query(queryService.games.getOneById, [gameId])
+    if (currentGames.length > 0) {
+      const { rows: updatedGames } = await client.query(queryService.games.updateOne, [state, gameId])
+      if (updatedGames[0]?.state === enums.gameStates.new && currentGames[0]?.state !== enums.gameStates.new) {
         await client.query(queryService.players.deleteManyOffline, [gameId])
-      } else if (updatedGames[0].state === 'PLAYING') {
-        const { rows: players } = await client.query(queryService.players.getMany, [gameId])
-        let missions = enums.missions
-        for (const player of players) {
-          const key = generateRandomNumber(0, missions.length)
-          const mission = missions[key]
-          missions = missions.filter((mission, index) => key !== index)
-          await client.query(queryService.players.updateOne, [player.state, mission, player.playerId, gameId])
-        }
+      } else if (updatedGames[0].state === enums.gameStates.play && currentGames[0].state !== enums.gameStates.play) {
+        const gameService = new GameService(client, queryService)
+        await gameService.dealCards(gameId)
       }
       client.release()
       reply.send(updatedGames[0])

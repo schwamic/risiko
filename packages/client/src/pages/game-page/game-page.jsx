@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Grid, Typography, Button } from '@mui/material'
 import { isNil } from 'lodash'
+import { useBeforeunload } from 'react-beforeunload'
 import { Footer, Card, Page, Avatar } from '../../components'
 import { GameLink, PlayersList, JoinForm, PlayingView, NewGameView, ConfirmView } from '../../containers/game-page'
 import enums from '../../lib/common/enums'
@@ -11,6 +12,7 @@ import { styles } from './game-page.styles'
 
 function GamePage () {
   useScrollTop()
+  useBeforeunload((event) => { if (!isNil(game)) event.preventDefault() })
   const { game, player, players, state, setState, actions } = useGame()
 
   const handleCancel = () => {

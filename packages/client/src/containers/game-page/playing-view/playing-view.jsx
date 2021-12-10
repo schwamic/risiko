@@ -10,11 +10,11 @@ function PlayingView ({ player, ...props }) {
 
   useEffect(() => {
     const session = Cookies.get('risk_session')
+    setMission(player.mission)
     if (!isNil(session)) {
-      const data = JSON.parse(session)
-      const key = data.player.key
       // TODO: decrypt mission
-      setMission(player.mission)
+      // const data = JSON.parse(session)
+      // const key = data.player.key
     }
   }, [player])
 

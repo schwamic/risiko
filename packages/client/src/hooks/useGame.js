@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { isNil } from 'lodash'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Cookies from 'js-cookie'
-import { useGetPlayerApi, useGetPlayersApi, useGetGameApi, useCreatePlayerApi, useUpdateGameApi } from './useApi'
+import { useGetPlayerApi, useGetPlayersApi, useGetGameApi, useCreatePlayerApi, useUpdateGameApi, useQuerySubscription } from './useApi'
 import generateRandomWord from '../lib/utils/generate-random-word'
 import enums from '../lib/common/enums'
 
@@ -11,10 +11,11 @@ function useGame () {
   const [searchParams] = useSearchParams()
   const [playerId, setPlayerId] = useState()
   const [state, setState] = useState(enums.gameStates.loading)
-  const { data: game, isError: isGameError } = useGetGameApi({ params: { name: searchParams.get('gameName') } })
-  const { data: players } = useGetPlayersApi({ params: { gameId: game?.gameId } })
-  const { data: player } = useGetPlayerApi({ params: { gameId: game?.gameId, playerId } })
-  const createPlayer = useCreatePlayerApi({ onSuccess: value => setPlayerId(value.playerId) })
+  const { data: game, isError: isGameError, refetch: refetchGame } = useGetGameApi({ params: { name: searchParams.get('gameName') } })
+  const { data: players, refetch: refetchPlayers } = useGetPlayersApi({ params: { gameId: game?.gameId } })
+  const { data: player, refetch: refetchPlayer } = useGetPlayerApi({ params: { gameId: game?.gameId, playerId } })
+  const { informAll } = useQuerySubscription({ refetchGame, refetchPlayer, refetchPlayers }, { gameId: game?.gameId, playerId: player?.playerId })
+  const createPlayer = useCreatePlayerApi({ onSuccess: player => setPlayerId(player.playerId) })
   const updateGame = useUpdateGameApi({ onSuccess: game => setState(game.state) })
 
   /**
@@ -55,7 +56,9 @@ function useGame () {
    * Game Sates
    */
   useEffect(() => {
-    // TODO: react to online states
+    if (!isNil(game) && (state === enums.gameStates.play || state === enums.gameStates.new)) {
+      setState(game.state)
+    }
   }, [game])
 
   const joinPlayer = async (playerName) => {
@@ -71,22 +74,25 @@ function useGame () {
         name: playerName,
         key
       })
+      informAll()
       Cookies.set('risk_session', JSON.stringify({ game, player: { ...player, key } }))
     }
   }
 
-  const dealCards = () => {
-    updateGame.mutate({
+  const dealCards = async () => {
+    await updateGame.mutateAsync({
       gameId: game.gameId,
       state: enums.gameStates.play
     })
+    informAll()
   }
 
-  const startNewGame = () => {
-    updateGame.mutate({
+  const startNewGame = async () => {
+    await updateGame.mutateAsync({
       gameId: game.gameId,
       state: enums.gameStates.new
     })
+    informAll()
   }
 
   return {

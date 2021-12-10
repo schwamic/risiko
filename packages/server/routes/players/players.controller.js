@@ -2,6 +2,7 @@ const { QueryService } = require('@lib/infrastructure/database')
 const errors = require('@lib/common/errors')
 const enums = require('@lib/common/enums')
 const generateRandomNumber = require('@lib/utils/generate-random-number')
+const { GameService } = require('@lib/services/game-service')
 
 module.exports = fastify => ({
   getOne: async (request, reply) => {
@@ -29,28 +30,23 @@ module.exports = fastify => ({
     let { name, key } = request.body
     const queryService = new QueryService()
     const client = await fastify.pg.connect()
-    const { rows: players } = await client.query(queryService.players.getMany, [gameId])
-    const playersWithSameName = players.filter(player => player.name.includes(name))
-    if (playersWithSameName.length > 0) {
-      name = `${name}${playersWithSameName.length + 1}`
-    }
-    const avatar = enums.avatars[generateRandomNumber(0, enums.avatars.length)]
-    const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar, key])
-    client.release()
-    reply.send(createdPlayers[0])
-  },
-  updateOne: async (request, reply) => {
-    const { gameId, playerId } = request.params
-    const { state } = request.body
-    const queryService = new QueryService()
-    const client = await fastify.pg.connect()
-    const { rows: currentPlayers } = await client.query(queryService.players.getOne, [playerId, gameId])
-    if (currentPlayers.length <= 0) {
+    const { rows: games } = await client.query(queryService.games.getOneById, [gameId])
+    if (games.length > 0) {
+      const { rows: players } = await client.query(queryService.players.getMany, [gameId])
+      const playersWithSameName = players.filter(player => player.name.includes(name))
+      if (playersWithSameName.length > 0) {
+        name = `${name}${playersWithSameName.length + 1}`
+      }
+      const avatar = enums.avatars[generateRandomNumber(0, enums.avatars.length)]
+      const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar, key])
+      if (games[0].state === enums.gameStates.play) {
+        const gameService = new GameService(client, queryService)
+        gameService.dealCard(gameId, createdPlayers[0].playerId)
+      }
       client.release()
-      throw new errors.NotFoundError(`No player with playerId ${playerId} found!`)
+      reply.send(createdPlayers[0])
+    } else {
+      throw new errors.NotFoundError(`No Game with gameId ${gameId} found!`)
     }
-    const { rows: updatedPlayers } = await client.query(queryService.players.updateOne, [state, currentPlayers[0].mission, playerId, gameId])
-    client.release()
-    reply.send(updatedPlayers[0])
   }
 })
