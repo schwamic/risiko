@@ -26,7 +26,7 @@ const UpdateGameSchema = {
 const GameNameSchema = {
   type: 'object',
   properties: {
-    name: { type: 'string', examples: ['foxadamu'] }
+    name: { type: 'string', examples: ['foxadamu'], minLength: 3, maxLength: 20 }
   },
   required: ['name'],
   additionalProperties: false

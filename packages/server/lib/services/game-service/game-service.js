@@ -39,10 +39,14 @@ class GameService {
   }
 
   _decryptMission (player) {
-    const playerKeyBytes = CryptoJS.AES.decrypt(player.key, config.SERVER_KEY)
-    const playerKey = playerKeyBytes.toString(CryptoJS.enc.Utf8)
-    const missionBytes = CryptoJS.AES.decrypt(player.mission, playerKey)
-    return missionBytes.toString(CryptoJS.enc.Utf8)
+    if (!_.isNil(player.mission) && !_.isEmpty(player.mission)) {
+      const playerKeyBytes = CryptoJS.AES.decrypt(player.key, config.SERVER_KEY)
+      const playerKey = playerKeyBytes.toString(CryptoJS.enc.Utf8)
+      const missionBytes = CryptoJS.AES.decrypt(player.mission, playerKey)
+      return missionBytes.toString(CryptoJS.enc.Utf8)
+    } else {
+      return player.mission
+    }
   }
 
   _encryptMission (player, mission) {

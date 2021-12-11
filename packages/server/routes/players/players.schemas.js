@@ -35,7 +35,7 @@ const PlayerSchema = {
 const CreatePlayerSchema = {
   type: 'object',
   properties: {
-    name: { type: 'string', examples: ['hiwug'] },
+    name: { type: 'string', examples: ['hiwug'], minLength: 3, maxLength: 15 },
     key: { type: 'string', examples: ['123456'] }
   },
   required: ['name', 'key'],

@@ -6,7 +6,7 @@ import generateRandomWord from '../../../lib/utils/generate-random-word'
 import { content } from './join-form.content'
 
 const validationSchema = yup.object().shape({
-  user: yup.string().required(content.form.error.user[0])
+  user: yup.string().min(3).required(content.form.error.user[0])
 })
 
 function JoinFrom ({ onJoin, ...props }) {
