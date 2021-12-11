@@ -14,7 +14,7 @@ function PlayersList ({ players, player, ...props }) {
 
   return (
     <Grid container item spacing={5} justifyContent={{ xs: 'center', sm: 'start' }}>
-      {players?.length > 0
+      {players?.length > 1
         ? (
           <>
             {players.length > 0 && parsePlayers(players, enums.playerStates.offline).map((player) => (
