@@ -9,8 +9,13 @@ function Footer (props) {
   return (
     <div css={styles.wrapper} {...props}>
       <Typography variant='caption' color='primary' css={styles.linkContext}>
+        <RouterLink to='/' css={styles.routerLink}>
+          {content.home}
+        </RouterLink>
+      </Typography>
+      <Typography variant='caption' color='primary' css={styles.linkContext}>
         <RouterLink to='/legal-notice' css={styles.routerLink}>
-          {content.legals.text}
+          {content.legals}
         </RouterLink>
       </Typography>
       <div>
