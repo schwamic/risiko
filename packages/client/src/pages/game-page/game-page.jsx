@@ -40,7 +40,7 @@ function GamePage () {
       <>
         {
         state === enums.gameStates.join
-          ? <Card color='blue'><JoinForm onJoin={({ user }) => actions.joinPlayer(user)} /></Card>
+          ? <Card color='blue'><JoinForm onJoin={values => actions.joinPlayer(values?.user)} /></Card>
           : state === enums.gameStates.new
             ? <Card color='yellow'> <NewGameView onDealCards={() => actions.dealCards()} /> </Card>
             : state === enums.gameStates.play
@@ -65,7 +65,7 @@ function GamePage () {
                 </Grid>
                 {state !== enums.gameStates.join && (
                   <Grid item xs={12} sm='auto'>
-                    {!isNil(player) && <Avatar user={player} variant='responsive' css={styles.avatar} />}
+                    {!isNil(player) && <Avatar player={player} variant='responsive' css={styles.avatar} />}
                   </Grid>
                 )}
               </Grid>
@@ -84,7 +84,7 @@ function GamePage () {
                   <Typography variant='h3' component='h2'>Players</Typography>
                 </Grid>
                 {!isNil(players) && (
-                  <PlayersList players={players} css={styles.players} />
+                  <PlayersList players={players} player={player} css={styles.players} />
                 )}
               </Grid>
             </Grid>
