@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useEffect } from 'react'
 import { Grid, Typography, Button } from '@mui/material'
 import { isNil } from 'lodash'
 import { useBeforeunload } from 'react-beforeunload'
@@ -18,6 +19,13 @@ function GamePage () {
     }
   })
   const { game, player, players, state, setState, actions } = useGame()
+
+  useEffect(() => {
+    if (!isNil(player)) {
+      const cleanUrl = window.location.href.split('&playerName')[0]
+      window.history.replaceState({}, null, cleanUrl)
+    }
+  }, [player])
 
   const handleCancel = () => {
     setState(enums.gameStates.play)

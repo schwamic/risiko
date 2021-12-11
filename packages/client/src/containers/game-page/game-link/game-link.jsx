@@ -10,7 +10,8 @@ function GameLink ({ game, ...props }) {
   const isTabletSize = useMediaQuery('(min-width:600px) and (max-width: 800px)', { noSsr: true })
   const [isOpen, setIsOpen] = useState(false)
 
-  const copyLinkToClipboard = () => {
+  const copyLinkToClipboard = async () => {
+    await window.navigator.clipboard.writeText(window.location.href)
     setIsOpen(true)
   }
 
