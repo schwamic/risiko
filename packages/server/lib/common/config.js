@@ -11,11 +11,13 @@ const schema = {
     DISABLED_CORS: { type: 'boolean', default: false },
     JWT_SIGNATURE: { type: 'string' },
     DATABASE_URL: { type: 'string' },
-    DATABASE_USE_SSL: { type: 'boolean', default: true }
+    DATABASE_USE_SSL: { type: 'boolean', default: true },
+    SERVER_KEY: { type: 'string' }
   },
   required: [
     'JWT_SIGNATURE',
-    'DATABASE_URL'
+    'DATABASE_URL',
+    'SERVER_KEY'
   ],
   additionalProperties: false
 }

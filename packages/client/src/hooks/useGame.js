@@ -75,7 +75,11 @@ function useGame () {
         key
       })
       informAll()
-      Cookies.set('risk_session', JSON.stringify({ game, player: { ...player, key } }))
+      Cookies.remove('risk_session')
+      Cookies.set('risk_session', JSON.stringify({
+        game: { gameId: game.gameId, name: game.name },
+        player: { playerId: player.playerId, key }
+      }))
     }
   }
 

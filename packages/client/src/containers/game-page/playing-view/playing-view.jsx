@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react'
 import { isNil } from 'lodash'
+import CryptoJS from 'crypto-js'
 import { Typography } from '@mui/material'
 import Cookies from 'js-cookie'
 import { styles } from './playing-view.styles'
@@ -10,12 +11,11 @@ function PlayingView ({ player, ...props }) {
 
   useEffect(() => {
     const session = Cookies.get('risk_session')
-    setMission(player.mission)
-    if (!isNil(session)) {
-      // TODO: decrypt mission
-      // const data = JSON.parse(session)
-      // const key = data.player.key
-      //
+    if (!isNil(session) && !isNil(player)) {
+      const data = JSON.parse(session)
+      const playerKeyBytes = CryptoJS.AES.decrypt(player.mission, data.player.key)
+      const mission = playerKeyBytes.toString(CryptoJS.enc.Utf8)
+      setMission(mission)
     }
   }, [player])
 

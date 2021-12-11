@@ -1,6 +1,8 @@
+const CryptoJS = require('crypto-js')
 const { QueryService } = require('@lib/infrastructure/database')
 const errors = require('@lib/common/errors')
 const enums = require('@lib/common/enums')
+const config = require('@lib/common/config')
 const generateRandomNumber = require('@lib/utils/generate-random-number')
 const { GameService } = require('@lib/services/game-service')
 
@@ -39,10 +41,11 @@ module.exports = function (fastify) {
           name = `${name}${playersWithSameName.length + 1}`
         }
         const avatar = enums.avatars[generateRandomNumber(0, enums.avatars.length)]
-        const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar, key])
+        const encryptedKey = CryptoJS.AES.encrypt(key, config.SERVER_KEY).toString()
+        const { rows: createdPlayers } = await client.query(queryService.players.createOne, [gameId, name, avatar, encryptedKey])
         if (games[0].state === enums.gameStates.play) {
           const gameService = new GameService(client, queryService)
-          await gameService.dealCard(gameId, createdPlayers[0].playerId)
+          await gameService.dealCard(gameId, createdPlayers[0])
         }
         client.release()
         reply.send(createdPlayers[0])
