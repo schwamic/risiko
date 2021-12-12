@@ -15,9 +15,17 @@ function PlayingView ({ player, ...props }) {
       const session = Cookies.get('risk_session')
       if (!isNil(session)) {
         const data = JSON.parse(session)
-        const playerKeyBytes = CryptoJS.AES.decrypt(player.mission, data.player.key)
-        const mission = playerKeyBytes.toString(CryptoJS.enc.Utf8)
-        setMission(isEmpty(mission) ? content.warning : mission)
+        if (player.mission === '') {
+          setMission(player.mission)
+        } else {
+          try {
+            const playerKeyBytes = CryptoJS.AES.decrypt(player.mission, data.player.key)
+            const mission = playerKeyBytes.toString(CryptoJS.enc.Utf8)
+            setMission(isEmpty(mission) ? content.warning : mission)
+          } catch (error) {
+            setMission(content.warning)
+          }
+        }
       } else {
         setMission(content.warning)
       }
