@@ -5690,6 +5690,13 @@ fastify-postgres@3.6.0:
   dependencies:
     fastify-plugin "^3.0.0"
 
+fastify-schedule@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-schedule/-/fastify-schedule-1.0.0.tgz#26dcd8ab2399d79aeaca0fa540c30948b587fbd2"
+  integrity sha512-oghFkqIKhhSD1m8iSXFR3B6NjvatT65E1BttVVV2YTcXeytm7kLnTyaTUtnsdmApXKELnszxpah+JOs5qtY5og==
+  dependencies:
+    fastify-plugin "^3.0.0"
+
 fastify-static@4.5.0, fastify-static@^4.0.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-4.5.0.tgz#0d3feff5373f5ed9c4e4cf31a2b84c2f70c35bb2"
@@ -12216,6 +12223,11 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+toad-scheduler@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/toad-scheduler/-/toad-scheduler-1.6.0.tgz#717b867d2f5da67d13d166ec16adc39d0506c537"
+  integrity sha512-+TdQhHTYLKfjXxLrAi4DgEptoQd99jUcr2teJnQrGlb70MEVrwP4SlVsaQO/dxCsNIM5qmYwZmynQd9tOPDRLQ==
 
 toidentifier@1.0.0:
   version "1.0.0"

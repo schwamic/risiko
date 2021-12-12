@@ -18,7 +18,8 @@ class QueryService {
       getMany: 'SELECT "gameId" FROM games WHERE name LIKE $1',
       createOne: 'INSERT INTO games (name, state) VALUES ($1, \'NEW_GAME\') RETURNING *',
       updateOne: 'UPDATE games SET state = $1 WHERE "gameId" = $2 RETURNING *',
-      deleteOne: 'DELETE FROM games WHERE "gameId" = $1'
+      deleteOne: 'DELETE FROM games WHERE "gameId" = $1',
+      deleteManyInactive: 'DELETE FROM games WHERE "updatedAt" < NOW() - INTERVAL \'7 days\''
     }
   }
 }

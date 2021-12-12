@@ -6,8 +6,10 @@ const FastifyHelmet = require('fastify-helmet')
 const FastifyCors = require('fastify-cors')
 const FastifyPostgres = require('fastify-postgres')
 const FastifyWebsocket = require('fastify-websocket')
+const { fastifySchedulePlugin } = require('fastify-schedule')
 const config = require('@lib/common/config')
 const logger = require('@lib/utils/logger')
+const jobs = require('./jobs')
 
 const bootstrap = async function () {
   logger.info('Setup server configuration.')
@@ -32,10 +34,6 @@ const bootstrap = async function () {
     credentials: true
   })
 
-  fastify.register(FastifyWebsocket, {
-    clientTracking: true
-  })
-
   fastify.register(FastifyPostgres, config.DATABASE_USE_SSL
     ? {
         connectionString: config.DATABASE_URL,
@@ -45,6 +43,10 @@ const bootstrap = async function () {
         connectionString: config.DATABASE_URL
       }
   )
+
+  fastify.register(FastifyWebsocket, {
+    clientTracking: true
+  })
 
   fastify.register(autoload, {
     dir: path.join(__dirname, '../plugins'),
@@ -57,6 +59,11 @@ const bootstrap = async function () {
     dirNameRoutePrefix: false,
     ignorePattern: /_.*.js/,
     options: options
+  })
+
+  fastify.register(fastifySchedulePlugin)
+  fastify.ready().then(() => {
+    fastify.scheduler.addSimpleIntervalJob(jobs(fastify).cleanUpGames)
   })
 
   logger.info('Server is ready to start.')
