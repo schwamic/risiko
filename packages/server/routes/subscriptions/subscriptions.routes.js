@@ -8,8 +8,8 @@ module.exports = {
       method: enums.httpMethods.GET,
       path: '/',
       schema: schemas.global,
-      handler: function (req, reply) {
-        reply.send({ message: 'please subscribe via websocket.' })
+      handler: function (request, reply) {
+        reply.code(enums.httpCodes.BadRequest).send({ message: 'please subscribe via websocket.' })
       },
       wsHandler: controller(fastify).global
     }
