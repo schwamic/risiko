@@ -50,6 +50,7 @@ module.exports = function (fastify) {
         client.release()
         reply.send(createdPlayers[0])
       } else {
+        client.release()
         throw new errors.NotFoundError(`No Game with gameId ${gameId} found!`)
       }
     },
@@ -59,6 +60,7 @@ module.exports = function (fastify) {
       const queryService = new QueryService()
       const client = await fastify.pg.connect()
       const { rows: updatedPlayers } = await client.query(queryService.players.updateState, [state, playerId, gameId])
+      client.release()
       if (updatedPlayers.length > 0) {
         reply.send(updatedPlayers[0])
       } else {

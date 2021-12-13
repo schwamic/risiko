@@ -10,6 +10,7 @@ module.exports = function (fastify) {
         const queryService = new QueryService()
         const client = await fastify.pg.connect()
         await client.query(queryService.games.deleteManyInactive)
+        client.release()
       },
       function (error) { logger.error(error) }
     ))

@@ -1,5 +1,6 @@
 const { QueryService } = require('@lib/infrastructure/database')
 const enums = require('@lib/common/enums')
+const logger = require('@lib/utils/logger')
 
 module.exports = function (fastify) {
   return {
@@ -27,6 +28,7 @@ module.exports = function (fastify) {
             client.send(JSON.stringify({ ...request.query, type: 'close' }))
           }
         })
+        client.release()
       })
     }
   }
