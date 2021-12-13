@@ -78,7 +78,7 @@ function useGame () {
       Cookies.remove('risk_session')
       Cookies.set('risk_session', JSON.stringify({
         game: { gameId: game.gameId, name: game.name },
-        player: { playerId: player.playerId, key }
+        player: { playerId: player.playerId, name: player.name, key }
       }))
     }
   }

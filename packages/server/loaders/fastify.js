@@ -45,7 +45,24 @@ const bootstrap = async function () {
   )
 
   fastify.register(FastifyWebsocket, {
-    clientTracking: true
+    options: {
+      clientTracking: true,
+      maxPayload: 104857, // maximum allowed messages size: 0.1 MiB
+      verifyClient: function (info, next) {
+        try {
+          const cookie = JSON.parse(decodeURIComponent(info.req.headers.cookie.split('risk_session=')[1]))
+          const query = info.req.url.split('gameId=')[1].split('&playerId=')
+          if (cookie.game.gameId === parseInt(query[0]) && cookie.player.playerId === parseInt(query[1])) {
+            return next(true)
+          } else {
+            next(false)
+          }
+        } catch (error) {
+          logger.error(error)
+          next(false)
+        }
+      }
+    }
   })
 
   fastify.register(autoload, {

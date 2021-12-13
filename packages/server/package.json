@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon --trace-warnings",
-    "start:pg": "docker-compose up",
+    "start:pg": "docker compose up",
     "test": "jest"
   },
   "dependencies": {

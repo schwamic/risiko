@@ -68,7 +68,6 @@ export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
       // Get Updates
       websocket.onmessage = (event) => {
         const data = JSON.parse(event.data)
-        console.log(data)
         if (parseInt(data.gameId) === gameId) {
           if (parseInt(data.playerId) === playerId && data.type === 'close') {
             setPlayerOnline(gameId, playerId, websocket)

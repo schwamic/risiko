@@ -2,6 +2,8 @@
 import { Button, Grid, TextField } from '@mui/material'
 import * as yup from 'yup'
 import { Formik, Field, Form } from 'formik'
+import { isNil } from 'lodash'
+import Cookies from 'js-cookie'
 import generateRandomWord from '../../../lib/utils/generate-random-word'
 import { content } from './join-form.content'
 
@@ -10,10 +12,20 @@ const validationSchema = yup.object().shape({
 })
 
 function JoinFrom ({ onJoin, ...props }) {
+  const getPlayerName = () => {
+    const session = Cookies.get('risk_session')
+    if (!isNil(session)) {
+      const data = JSON.parse(session)
+      return data.player.name
+    } else {
+      return generateRandomWord(5, 8)
+    }
+  }
+
   return (
     <Formik
       initialValues={{
-        user: generateRandomWord(5, 8)
+        user: getPlayerName()
       }}
       validationSchema={validationSchema}
       onSubmit={onJoin}
