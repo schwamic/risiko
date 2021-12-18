@@ -55,7 +55,7 @@ export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
 
   useEffect(() => {
     let websocket
-    if (isNil(websocket) && !isNil(gameId) && !isNil(playerId)) {
+    if (!isNil(gameId) && !isNil(playerId)) {
       websocket = new WebSocket(`${process.env.REACT_APP_API_WEBSOCKET_URL}?gameId=${gameId}&playerId=${playerId}`)
 
       // First Connect

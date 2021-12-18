@@ -4,7 +4,7 @@ const logger = require('@lib/utils/logger')
 
 module.exports = function (fastify) {
   return {
-    cleanUpGames: new SimpleIntervalJob({ days: 7, runImmediately: true }, new AsyncTask(
+    cleanUpGames: new SimpleIntervalJob({ days: 1, runImmediately: true }, new AsyncTask(
       'JOB: Clean Up Games',
       async function () {
         const queryService = new QueryService()

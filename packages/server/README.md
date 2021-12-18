@@ -6,7 +6,7 @@ This project was bootstrapped with [Fastify](https://www.fastify.io).
 
 In the project directory, you can run:
 
-### `docker-compose up`
+### `start:pg`
 
 Starts the PostgreSQL server via [Docker](https://www.docker.com/). You can use [Postico](https://eggerapps.at/postico) as a graphical client.
 
