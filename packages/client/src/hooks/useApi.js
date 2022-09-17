@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { useQuery, useMutation } from 'react-query'
 import * as API from '../lib/utils/api'
 import { print } from '../lib/utils/console'
+import { getApiWebsocketEndpoint } from '../lib/utils/get-endpoint'
 
 export const useGetPlayerApi = ({ params }) => {
   return useQuery(['player', params], API.getPlayer, {
@@ -56,7 +57,8 @@ export const useQuerySubscription = (callbacks, { playerId, gameId }) => {
   useEffect(() => {
     let websocket
     if (!isNil(gameId) && !isNil(playerId)) {
-      websocket = new WebSocket(`${process.env.REACT_APP_API_WEBSOCKET_URL}?gameId=${gameId}&playerId=${playerId}`)
+      const url = getApiWebsocketEndpoint()
+      websocket = new WebSocket(`${url}?gameId=${gameId}&playerId=${playerId}`)
 
       // First Connect
       websocket.onopen = () => {

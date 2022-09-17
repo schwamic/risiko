@@ -1,0 +1,41 @@
+version: "3.6"
+
+
+services:
+  postgres:
+    container_name: risk_postgres_container
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./packages/server/lib/infrastructure/database/migrations/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./packages/server/lib/infrastructure/database/migrations/prefill.sql:/docker-entrypoint-initdb.d/prefill.sql
+
+  webserver:
+    build: .
+    container_name: risk_webserver_container
+    depends_on:
+      - postgres
+    image: risk_webserver
+    ports:
+      - "8090:8090"
+
+  ngrok:
+    command: ["ngrok", "http", "webserver:8090"]
+    container_name: ngrok_container
+    depends_on:
+      - webserver
+    image: wernight/ngrok
+    ports:
+      - "4040:4040"
+    volumes:
+      - ./ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml
+
+
+volumes:
+    postgres:
+    ngrok:
