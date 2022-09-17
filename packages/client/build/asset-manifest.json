@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.js": "/static/js/main.b95a72ce.chunk.js",
+    "main.js.map": "/static/js/main.b95a72ce.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.add5d5e5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.add5d5e5.js.map",
+    "static/css/2.778eca17.chunk.css": "/static/css/2.778eca17.chunk.css",
+    "static/js/2.24ed4f01.chunk.js": "/static/js/2.24ed4f01.chunk.js",
+    "static/js/2.24ed4f01.chunk.js.map": "/static/js/2.24ed4f01.chunk.js.map",
+    "static/js/3.7f11bad4.chunk.js": "/static/js/3.7f11bad4.chunk.js",
+    "static/js/3.7f11bad4.chunk.js.map": "/static/js/3.7f11bad4.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.778eca17.chunk.css.map": "/static/css/2.778eca17.chunk.css.map",
+    "static/js/2.24ed4f01.chunk.js.LICENSE.txt": "/static/js/2.24ed4f01.chunk.js.LICENSE.txt",
+    "static/media/ghost_1079732.7d591a3b.svg": "/static/media/ghost_1079732.7d591a3b.svg",
+    "static/media/monster_2465426.06027c16.svg": "/static/media/monster_2465426.06027c16.svg",
+    "static/media/monster_2465427.8121f244.svg": "/static/media/monster_2465427.8121f244.svg",
+    "static/media/monster_2465428.8dd67d0a.svg": "/static/media/monster_2465428.8dd67d0a.svg",
+    "static/media/monster_2465429.e92a8624.svg": "/static/media/monster_2465429.e92a8624.svg",
+    "static/media/monster_2465430.60d61b8b.svg": "/static/media/monster_2465430.60d61b8b.svg",
+    "static/media/monster_2465431.929559b8.svg": "/static/media/monster_2465431.929559b8.svg",
+    "static/media/monster_2465432.c8aed38f.svg": "/static/media/monster_2465432.c8aed38f.svg",
+    "static/media/monster_2465433.0dadf0fe.svg": "/static/media/monster_2465433.0dadf0fe.svg",
+    "static/media/monster_2465434.acd84fbe.svg": "/static/media/monster_2465434.acd84fbe.svg",
+    "static/media/monster_2465435.a817e3c9.svg": "/static/media/monster_2465435.a817e3c9.svg",
+    "static/media/monster_2465436.a73b7c81.svg": "/static/media/monster_2465436.a73b7c81.svg",
+    "static/media/risk_logo.acc07455.png": "/static/media/risk_logo.acc07455.png",
+    "static/media/500.css": "/static/media/roboto-vietnamese-500-normal.b8e494da.woff2",
+    "static/media/700.css": "/static/media/roboto-vietnamese-700-normal.3096f18a.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.add5d5e5.js",
+    "static/css/2.778eca17.chunk.css",
+    "static/js/2.24ed4f01.chunk.js",
+    "static/js/main.b95a72ce.chunk.js"
+  ]
+}
