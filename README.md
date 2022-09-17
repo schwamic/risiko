@@ -18,3 +18,4 @@ The aim of this small application is that you can distribute mission cards among
 - [Server App](./packages/server/README.md)
 - [Client App](./packages/client/README.md)
 - [Development](./docs/development.md)
+- [Raspberry Pi](./docs/raspberrypi.md)
