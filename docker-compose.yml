@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
     image: postgres:14
     ports:
-      - "5432:5432"
+      - "5433:5432"
     restart: always
     volumes:
       - ./packages/server/lib/infrastructure/database/migrations/create.sql:/docker-entrypoint-initdb.d/create.sql
@@ -25,15 +25,17 @@ services:
       - "8090:8090"
 
   ngrok:
-    command: ["ngrok", "http", "webserver:8090"]
+    command: ["http", "webserver:8090"]
     container_name: ngrok_container
     depends_on:
       - webserver
-    image: wernight/ngrok
+    environment:
+      - NGROK_CONFIG=/etc/ngrok.yml
+    image: ngrok/ngrok:debian
     ports:
       - "4040:4040"
     volumes:
-      - ./ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml
+      - ./ngrok.yml:/etc/ngrok.yml
 
 
 volumes:
